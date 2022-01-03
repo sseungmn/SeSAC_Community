@@ -68,3 +68,38 @@ class CustomButton: UIButton {
         }
     }
 }
+
+// Separator View
+class SeparatorView: UIView {
+    private var height: CGFloat = 0
+    
+    enum SeparatorType {
+        case `default`, thick
+    }
+    
+    convenience init(of type: SeparatorType) {
+        self.init(frame: .zero)
+        switch type {
+        case .default: self.height = 3.0
+        case .thick: self.height = 8.0
+        }
+    }
+    
+    func setFrame(from bounds: CGRect) {
+        var frame = bounds
+        frame = CGRect(x: 0,
+                       y: frame.size.height - height,
+                       width: frame.size.width,
+                       height: height)
+        self.frame = frame
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .systemGray5
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

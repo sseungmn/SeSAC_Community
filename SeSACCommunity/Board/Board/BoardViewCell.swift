@@ -28,6 +28,7 @@ class BoardViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 13)
         label.textColor = .lightGray
     }
+    let separatorView = SeparatorView(of: .thick)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,15 +38,7 @@ class BoardViewCell: UITableViewCell {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        let separatorHeight = CGFloat(8.0)
-        let separator = UIView().then { view in
-            view.backgroundColor = .systemGray5
-        }
-        addSubview(separator)
-        separator.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(separatorHeight)
-        }
+        separatorView.setFrame(from: rect)
     }
     
     required init?(coder: NSCoder) {
@@ -64,5 +57,6 @@ class BoardViewCell: UITableViewCell {
         contentStackView.addArrangedSubview(infoStackView)
         infoStackView.addArrangedSubview(userNameLabel)
         infoStackView.addArrangedSubview(dateLabel)
+        addSubview(separatorView)
     }
 }
