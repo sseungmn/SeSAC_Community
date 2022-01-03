@@ -11,24 +11,20 @@ final class SignUpView: BaseView {
     
     // MARK: Private Variable
     private let fieldTitles = ["이메일 주소", "닉네임", "비밀번호", "비밀번호 확인"]
-    private var VStackView: UIStackView = {
-        let stackView = UIStackView()
+    private var VStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
         stackView.spacing = 8
-        return stackView
-    }()
+    }
     
     // MARK: Accessable Variable
     var emailTextFeild = CustomTextField()
     var nickNameTextFeild = CustomTextField()
     var passwordTextFeild = CustomTextField()
     var passwordCheckTextFeild = CustomTextField()
-    var confirmButton: CustomButton = {
-        let button = CustomButton()
+    var confirmButton = CustomButton().then { button in
         button.setTitle("가입하기", for: .disabled)
         button.setTitle("시작하기", for: .normal)
-        return button
-    }()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

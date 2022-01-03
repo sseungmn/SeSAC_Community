@@ -8,11 +8,9 @@
 import UIKit
 
 class BoardView: BaseView {
-    var tableView: UITableView = {
-        let tableView = UITableView()
+    var tableView = UITableView().then { tableView in
         tableView.separatorStyle = .none
-        return tableView
-    }()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

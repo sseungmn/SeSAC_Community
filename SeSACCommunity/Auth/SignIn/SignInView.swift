@@ -11,21 +11,17 @@ class SignInView: BaseView {
     
     // MARK: Private Variable
     private  let fieldTitles = ["닉네임", "비밀번호"]
-    private var VStackView: UIStackView = {
-        let stackView = UIStackView()
+    private var VStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
         stackView.spacing = 8
-        return stackView
-    }()
+    }
     
     // MARK: Accesable Variable
     var nickNameTextFeild = CustomTextField()
     var passwordTextFeild = CustomTextField()
-    var confirmButton: CustomButton = {
-        let button = CustomButton()
+    var confirmButton = CustomButton().then { button in
         button.setTitle("로그인", for: .normal)
-        return button
-    }()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

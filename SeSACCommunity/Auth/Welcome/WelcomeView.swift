@@ -10,41 +10,31 @@ import UIKit
 final class WelcomeView: BaseView {
     
     // MARK: Private Variable
-    private var titleVStackView: UIStackView = {
-        let stackView = UIStackView()
+    private var titleVStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .center
         stackView.spacing = 10
-        return stackView
-    }()
-    private var logoImageView: UIImageView = {
-        let imageView = UIImageView()
+    }
+    private var logoImageView = UIImageView().then { imageView in
         imageView.image = UIImage(named: "logo_ssac_clear")!
-        return imageView
-    }()
-    private var titleLabel: UILabel = {
-        let label = UILabel()
+    }
+    private var titleLabel = UILabel().then { label in
         label.text = "새싹 근처의 당근농장"
         label.font = .systemFont(ofSize: titleSize, weight: .heavy)
-        return label
-    }()
-    private var subtitleLabel: UILabel = {
-        let label = UILabel()
+    }
+    private var subtitleLabel = UILabel().then { label in
         label.text = "iOS 지식부터 바람의 나라까지\n지금 SeSAC에서 함께해보세요!"
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: subtitleSize, weight: .bold)
         label.textColor = .darkGray
-        return label
-    }()
+    }
     
     // MARK: Accessable Variable
-    var startButton: CustomButton = {
-        let button = CustomButton()
+    var startButton = CustomButton().then { button in
         button.setTitle("시작하기", for: .normal)
-        return button
-    }()
+    }
     var fotterLabel = UILabel()
     
     override init(frame: CGRect) {

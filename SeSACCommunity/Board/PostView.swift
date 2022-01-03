@@ -8,36 +8,26 @@
 import UIKit
 
 class PostView: UITableViewCell {
-    let contentStackView: UIStackView = {
-        let stackView = UIStackView()
+    let contentStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.spacing = 20
-        return stackView
-    }()
-    let bodyLabel: UILabel = {
-        let label = UILabel()
+    }
+    let bodyLabel = UILabel().then { label in
         label.numberOfLines = 4
-        return label
-    }()
-    let infoStackView: UIStackView = {
-        let stackView = UIStackView()
+    }
+    let infoStackView = UIStackView().then { stackView in
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
-        return stackView
-    }()
-    let userNameLabel: UILabel = {
-        let label = UILabel()
+    }
+    let userNameLabel = UILabel().then { label in
         label.font = .systemFont(ofSize: 13)
         label.textColor = .lightGray
-        return label
-    }()
-    let dateLabel: UILabel = {
-        let label = UILabel()
+    }
+    let dateLabel = UILabel().then { label in
         label.font = .systemFont(ofSize: 13)
         label.textColor = .lightGray
-        return label
-    }()
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -47,16 +37,15 @@ class PostView: UITableViewCell {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        let screenSize = UIScreen.main.bounds
         let separatorHeight = CGFloat(8.0)
-        let additionalSeparator = UIView.init(
-            frame: CGRect(x: 0,
-                          y: self.frame.size.height-separatorHeight,
-                          width: screenSize.width,
-                          height: separatorHeight)
-        )
-        additionalSeparator.backgroundColor = UIColor.systemGray5
-        addSubview(additionalSeparator)
+        let separator = UIView().then { view in
+            view.backgroundColor = .systemGray5
+        }
+        addSubview(separator)
+        separator.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(separatorHeight)
+        }
     }
     
     required init?(coder: NSCoder) {

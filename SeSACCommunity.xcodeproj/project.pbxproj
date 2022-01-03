@@ -31,7 +31,6 @@
 		B5ABA64F27809FFF00E40C2A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ABA64E27809FFF00E40C2A /* WelcomeView.swift */; };
 		B5ABA6512780A02A00E40C2A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ABA6502780A02A00E40C2A /* BaseView.swift */; };
 		B5C0C4AF2783381200BD24CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0C4AE2783381200BD24CA /* BaseViewController.swift */; };
-		B5C0C4B12783607800BD24CA /* WelcomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0C4B02783607800BD24CA /* WelcomViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +61,6 @@
 		B5ABA64E27809FFF00E40C2A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		B5ABA6502780A02A00E40C2A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		B5C0C4AE2783381200BD24CA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		B5C0C4B02783607800BD24CA /* WelcomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomViewModel.swift; sourceTree = "<group>"; };
 		FEC09D00BEAFFF33B86B1D30 /* Pods_SeSACCommunity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACCommunity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,7 +90,6 @@
 			children = (
 				B5ABA63B27809C6F00E40C2A /* WelcomeViewController.swift */,
 				B5ABA64E27809FFF00E40C2A /* WelcomeView.swift */,
-				B5C0C4B02783607800BD24CA /* WelcomViewModel.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -342,7 +339,6 @@
 				B5C0C4AF2783381200BD24CA /* BaseViewController.swift in Sources */,
 				B54DCC63278193B20065BF4D /* ReusableView.swift in Sources */,
 				B5ABA63C27809C6F00E40C2A /* WelcomeViewController.swift in Sources */,
-				B5C0C4B12783607800BD24CA /* WelcomViewModel.swift in Sources */,
 				B54DCC6B2781CB740065BF4D /* Model.swift in Sources */,
 				B54DCC79278203170065BF4D /* PostView.swift in Sources */,
 				B5ABA6512780A02A00E40C2A /* BaseView.swift in Sources */,

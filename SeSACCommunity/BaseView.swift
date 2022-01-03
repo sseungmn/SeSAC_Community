@@ -6,7 +6,9 @@
 //
 
 import UIKit
+
 import SnapKit
+import Then
 
 class BaseView: UIView {
     static let titleSize: CGFloat = 20
