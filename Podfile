@@ -10,5 +10,6 @@ target 'SeSACCommunity' do
   pod 'SwiftLint'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxGesture'
 
 end
