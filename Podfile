@@ -8,5 +8,7 @@ target 'SeSACCommunity' do
   # Pods for SeSACCommunity
   pod 'SnapKit'
   pod 'SwiftLint'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 
 end
