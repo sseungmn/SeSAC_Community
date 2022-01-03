@@ -6,10 +6,13 @@ target 'SeSACCommunity' do
   use_frameworks!
 
   # Pods for SeSACCommunity
-  pod 'SnapKit'
-  pod 'SwiftLint'
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxGesture'
+  
+  pod 'SnapKit'
+  pod 'Then'
+
+  pod 'SwiftLint'
 
 end
