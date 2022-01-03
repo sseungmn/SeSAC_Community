@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIColor {
-  static var themeColor: UIColor {
-    return UIColor(named: "themeColor")!
-  }
+    static var themeColor: UIColor {
+        return UIColor(named: "themeColor")!
+    }
 }
