@@ -54,7 +54,6 @@ final class WelcomeView: BaseView {
   
   override func configure() {
     configureLabel()
-    configureButton()
   }
   
   override func setConstraint() {
@@ -79,9 +78,6 @@ final class WelcomeView: BaseView {
       make.bottom.equalTo(fotterLabel.snp.top)
       make.height.equalTo(50)
     }
-  }
-  
-  func configureButton() {
   }
   
   // MARK: Footer Label
