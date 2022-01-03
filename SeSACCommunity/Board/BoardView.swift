@@ -26,7 +26,7 @@ class BoardView: BaseView {
     }
     
     override func configure() {
-        tableView.register(PostView.self, forCellReuseIdentifier: "post")
+        tableView.register(BoardViewCell.self, forCellReuseIdentifier: "post")
     }
     
     override func setConstraint() {
