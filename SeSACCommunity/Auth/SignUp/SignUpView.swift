@@ -7,15 +7,18 @@
 
 import UIKit
 
-class SignUpView: BaseView {
+final class SignUpView: BaseView {
   
-  let fieldTitles = ["이메일 주소", "닉네임", "비밀번호", "비밀번호 확인"]
-  var VStackView: UIStackView = {
+  // MARK: Private Variable
+  private let fieldTitles = ["이메일 주소", "닉네임", "비밀번호", "비밀번호 확인"]
+  private var VStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.spacing = 8
     return stackView
   }()
+  
+  // MARK: Accessable Variable
   var emailTextFeild = CustomTextField()
   var nickNameTextFeild = CustomTextField()
   var passwordTextFeild = CustomTextField()
@@ -27,11 +30,6 @@ class SignUpView: BaseView {
     return button
   }()
   
-  @objc func toggled(_ sender: UIButton) {
-    sender.isEnabled.toggle()
-    print(sender.isEnabled)
-  }
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
@@ -41,12 +39,12 @@ class SignUpView: BaseView {
   }
   
   override func configure() {
-    confirmButton.addTarget(self, action: #selector(toggled), for: .touchUpInside)
     for (index, textField) in [emailTextFeild, nickNameTextFeild, passwordTextFeild, passwordCheckTextFeild].enumerated() {
       textField.placeholder = fieldTitles[index]
     }
   }
   
+  // MAKR: Set Constraint
   override func setConstraint() {
     addSubview(VStackView)
     VStackView.addArrangedSubview(emailTextFeild)

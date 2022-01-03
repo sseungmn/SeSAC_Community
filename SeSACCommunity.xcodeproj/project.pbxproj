@@ -28,9 +28,9 @@
 		B5ABA63C27809C6F00E40C2A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ABA63B27809C6F00E40C2A /* WelcomeViewController.swift */; };
 		B5ABA64127809C7000E40C2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5ABA64027809C7000E40C2A /* Assets.xcassets */; };
 		B5ABA64427809C7000E40C2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5ABA64227809C7000E40C2A /* LaunchScreen.storyboard */; };
-		B5ABA64D27809EDD00E40C2A /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ABA64C27809EDD00E40C2A /* Observable.swift */; };
 		B5ABA64F27809FFF00E40C2A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ABA64E27809FFF00E40C2A /* WelcomeView.swift */; };
 		B5ABA6512780A02A00E40C2A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ABA6502780A02A00E40C2A /* BaseView.swift */; };
+		B5C0C4AF2783381200BD24CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0C4AE2783381200BD24CA /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,9 +58,9 @@
 		B5ABA64027809C7000E40C2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5ABA64327809C7000E40C2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5ABA64527809C7000E40C2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5ABA64C27809EDD00E40C2A /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		B5ABA64E27809FFF00E40C2A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		B5ABA6502780A02A00E40C2A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		B5C0C4AE2783381200BD24CA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FEC09D00BEAFFF33B86B1D30 /* Pods_SeSACCommunity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACCommunity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -97,8 +97,8 @@
 		B54DCC712781E8A50065BF4D /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				B54DCC6C2781CD680065BF4D /* SignInView.swift */,
 				B54DCC6E2781CDCE0065BF4D /* SignInViewController.swift */,
+				B54DCC6C2781CD680065BF4D /* SignInView.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -169,8 +169,8 @@
 				B5820026278175D2007DAC5E /* Auth */,
 				B54DCC75278202FF0065BF4D /* Board */,
 				B5ABA64B27809C7A00E40C2A /* Project */,
-				B5ABA64C27809EDD00E40C2A /* Observable.swift */,
 				B5ABA6502780A02A00E40C2A /* BaseView.swift */,
+				B5C0C4AE2783381200BD24CA /* BaseViewController.swift */,
 				B54DCC62278193B20065BF4D /* ReusableView.swift */,
 				B54DCC6A2781CB740065BF4D /* Model.swift */,
 				B54DCC662781BD190065BF4D /* APIService.swift */,
@@ -333,10 +333,10 @@
 			files = (
 				B54DCC65278197A10065BF4D /* SignUpViewController.swift in Sources */,
 				B5820029278178A1007DAC5E /* UIColor+Extension.swift in Sources */,
-				B5ABA64D27809EDD00E40C2A /* Observable.swift in Sources */,
 				B5ABA64F27809FFF00E40C2A /* WelcomeView.swift in Sources */,
 				B54DCC742781FB540065BF4D /* UIViewController+Extension.swift in Sources */,
 				B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */,
+				B5C0C4AF2783381200BD24CA /* BaseViewController.swift in Sources */,
 				B54DCC63278193B20065BF4D /* ReusableView.swift in Sources */,
 				B5ABA63C27809C6F00E40C2A /* WelcomeViewController.swift in Sources */,
 				B54DCC6B2781CB740065BF4D /* Model.swift in Sources */,

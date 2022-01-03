@@ -9,6 +9,7 @@ import UIKit
 
 final class WelcomeView: BaseView {
   
+  // MARK: Private Variable
   private var titleVStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .vertical
@@ -37,6 +38,8 @@ final class WelcomeView: BaseView {
     label.textColor = .darkGray
     return label
   }()
+  
+  // MARK: Accessable Variable
   var startButton: CustomButton = {
     let button = CustomButton()
     button.setTitle("시작하기", for: .normal)
@@ -56,6 +59,7 @@ final class WelcomeView: BaseView {
     configureLabel()
   }
   
+  // MARK: Set Constraint
   override func setConstraint() {
     addSubview(titleVStackView)
     titleVStackView.snp.makeConstraints { make in
