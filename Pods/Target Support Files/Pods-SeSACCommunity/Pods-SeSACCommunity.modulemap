@@ -1,0 +1,6 @@
+framework module Pods_SeSACCommunity {
+  umbrella header "Pods-SeSACCommunity-umbrella.h"
+
+  export *
+  module * { export * }
+}
