@@ -7,10 +7,12 @@
 
 import UIKit
 
-class BoardViewController: UIViewController {
+class BoardViewController: BaseViewController {
+    
+    var board = [Post]()
     
     let mainView = BoardView()
-    var board = [Post]()
+    let addFloatingButton = FloatingButton(type: .custom)
     
     override func loadView() {
         view = mainView
@@ -29,6 +31,20 @@ class BoardViewController: UIViewController {
                 self.mainView.tableView.reloadData()
             }
         }
+    }
+    
+    override func setConstraint() {
+        view.addSubview(addFloatingButton)
+        addFloatingButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+        }
+    }
+    
+    override func configure() {
+        let image = UIImage(systemName: "pencil")!.withRenderingMode(.alwaysTemplate)
+        addFloatingButton.tintColor = .white
+        addFloatingButton.setImage(image, for: .normal)
     }
 }
 

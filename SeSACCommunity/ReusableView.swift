@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 // MARK: CustomTextField
-class CustomTextField: UITextField {
+final class CustomTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +38,7 @@ class CustomTextField: UITextField {
 }
 
 // MARK: CustomButton
-class CustomButton: UIButton {
+final class CustomButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,7 +70,7 @@ class CustomButton: UIButton {
 }
 
 // MARK: Separator View
-class SeparatorView: UIView {
+final class SeparatorView: UIView {
     private var height: CGFloat = 0
     
     enum SeparatorType {
@@ -101,5 +101,47 @@ class SeparatorView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: AddButton
+final class FloatingButton: UIButton {
+    static private let size: CGFloat = 70
+    
+    private let cornerRadius: CGFloat = size / 2
+    private let fillColor: UIColor = .themeColor
+    private let shadowColor: UIColor = .black
+    
+    private let symbolConfiuration = UIImage.SymbolConfiguration(pointSize: size / 2)
+    
+    convenience init(type: ButtonType) {
+        self.init(frame: .zero)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setConstrints()
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setConstrints() {
+        self.snp.makeConstraints { make in
+            make.size.equalTo(FloatingButton.size)
+        }
+    }
+    
+    private func configure() {
+        backgroundColor = .themeColor
+        layer.shadowColor = shadowColor.cgColor
+        layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        layer.shadowOpacity = 0.4
+        layer.shadowRadius = 2.0
+        layer.masksToBounds = false
+        layer.cornerRadius = cornerRadius
+        setPreferredSymbolConfiguration(symbolConfiuration, forImageIn: .normal)
     }
 }
