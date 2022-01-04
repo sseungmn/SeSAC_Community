@@ -69,7 +69,7 @@ class CustomButton: UIButton {
     }
 }
 
-// Separator View
+// MARK: Separator View
 class SeparatorView: UIView {
     private var height: CGFloat = 0
     

@@ -32,6 +32,7 @@
 		B5ABA6512780A02A00E40C2A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ABA6502780A02A00E40C2A /* BaseView.swift */; };
 		B5C0C4AF2783381200BD24CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0C4AE2783381200BD24CA /* BaseViewController.swift */; };
 		B5C0C4B32783725900BD24CA /* DetailPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0C4B22783725900BD24CA /* DetailPostView.swift */; };
+		B5C0C4B72783772600BD24CA /* DetailPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0C4B62783772600BD24CA /* DetailPostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		B5ABA6502780A02A00E40C2A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		B5C0C4AE2783381200BD24CA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B5C0C4B22783725900BD24CA /* DetailPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostView.swift; sourceTree = "<group>"; };
+		B5C0C4B62783772600BD24CA /* DetailPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
 		FEC09D00BEAFFF33B86B1D30 /* Pods_SeSACCommunity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACCommunity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -117,10 +119,8 @@
 		B54DCC75278202FF0065BF4D /* Board */ = {
 			isa = PBXGroup;
 			children = (
-				B54DCC76278203110065BF4D /* BoardView.swift */,
-				B54DCC78278203170065BF4D /* BoardViewCell.swift */,
-				B54DCC7A278206FC0065BF4D /* BoardViewController.swift */,
-				B5C0C4B22783725900BD24CA /* DetailPostView.swift */,
+				B5C0C4B5278372C200BD24CA /* DetailPost */,
+				B5C0C4B4278372B700BD24CA /* Board */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -191,6 +191,25 @@
 				B5ABA64527809C7000E40C2A /* Info.plist */,
 			);
 			path = Project;
+			sourceTree = "<group>";
+		};
+		B5C0C4B4278372B700BD24CA /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				B54DCC76278203110065BF4D /* BoardView.swift */,
+				B54DCC78278203170065BF4D /* BoardViewCell.swift */,
+				B54DCC7A278206FC0065BF4D /* BoardViewController.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		B5C0C4B5278372C200BD24CA /* DetailPost */ = {
+			isa = PBXGroup;
+			children = (
+				B5C0C4B22783725900BD24CA /* DetailPostView.swift */,
+				B5C0C4B62783772600BD24CA /* DetailPostViewController.swift */,
+			);
+			path = DetailPost;
 			sourceTree = "<group>";
 		};
 		C14D5034921A08998EABF5A8 /* Frameworks */ = {
@@ -343,6 +362,7 @@
 				B54DCC63278193B20065BF4D /* ReusableView.swift in Sources */,
 				B5ABA63C27809C6F00E40C2A /* WelcomeViewController.swift in Sources */,
 				B5C0C4B32783725900BD24CA /* DetailPostView.swift in Sources */,
+				B5C0C4B72783772600BD24CA /* DetailPostViewController.swift in Sources */,
 				B54DCC6B2781CB740065BF4D /* Model.swift in Sources */,
 				B54DCC79278203170065BF4D /* BoardViewCell.swift in Sources */,
 				B5ABA6512780A02A00E40C2A /* BaseView.swift in Sources */,
