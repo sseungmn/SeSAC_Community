@@ -60,24 +60,25 @@ final class DetailPostView: BaseView {
     let separator2 = SeparatorView(of: .default)
     
     // MARK: CommentInfo
-    let commentHStackView = UIStackView().then { stackView in
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.spacing = 10.0
-        
-        stackView.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        stackView.isLayoutMarginsRelativeArrangement = true
-    }
-    let commentImageView = UIImageView().then { imageView in
-        guard let image = UIImage(systemName: "bubble.right") else { return }
-        imageView.image = image
-        imageView.tintColor = .lightGray
-        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-    }
-    let commentDescriptionLabel = UILabel().then { label in
-        label.textColor = .darkGray
-        label.font = .systemFont(ofSize: 15)
-    }
+    let commentInfoStackView = CommentInfoStackView()
+//    let commentHStackView = UIStackView().then { stackView in
+//        stackView.axis = .horizontal
+//        stackView.distribution = .fill
+//        stackView.spacing = 10.0
+//
+//        stackView.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+//        stackView.isLayoutMarginsRelativeArrangement = true
+//    }
+//    let commentImageView = UIImageView().then { imageView in
+//        guard let image = UIImage(systemName: "bubble.right") else { return }
+//        imageView.image = image
+//        imageView.tintColor = .lightGray
+//        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+//    }
+//    let commentDescriptionLabel = UILabel().then { label in
+//        label.textColor = .darkGray
+//        label.font = .systemFont(ofSize: 15)
+//    }
     
     let separator3 = SeparatorView(of: .default)
     
@@ -93,7 +94,7 @@ final class DetailPostView: BaseView {
         usernameLabel.text = "seouh"
         dateLabel.text = "01/04"
         postBodyLabel.text = "코로나로 인해서 일자리도 많이 줄고 취업하기도 어렵구 씁쓸하네요오"
-        commentDescriptionLabel.text = "댓글 4"
+        commentInfoStackView.descriptionLabel.text = "댓글 4"
     }
     
     override func setConstraint() {
@@ -128,9 +129,7 @@ final class DetailPostView: BaseView {
         scrollView.addSubview(separator2)
         
         // MARK: CommentInfo
-        contentStackView.addArrangedSubview(commentHStackView)
-        commentHStackView.addArrangedSubview(commentImageView)
-        commentHStackView.addArrangedSubview(commentDescriptionLabel)
+        contentStackView.addArrangedSubview(commentInfoStackView)
         
         scrollView.addSubview(separator3)
     }
@@ -139,6 +138,6 @@ final class DetailPostView: BaseView {
     override func draw(_ rect: CGRect) {
         separator1.setFrame(from: postInfoHStackView.frame)
         separator2.setFrame(from: postStackView.frame)
-        separator3.setFrame(from: commentHStackView.frame)
+        separator3.setFrame(from: commentInfoStackView.frame)
     }
 }

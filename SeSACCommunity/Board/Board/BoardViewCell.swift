@@ -11,6 +11,9 @@ class BoardViewCell: UITableViewCell {
     let contentStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
         stackView.distribution = .fill
+        
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        stackView.isLayoutMarginsRelativeArrangement = true
     }
     
     let postStackView = UIStackView().then { stackView in
@@ -39,24 +42,7 @@ class BoardViewCell: UITableViewCell {
     
     let defaultSeparator = SeparatorView(of: .default)
     
-    let commentHStackView = UIStackView().then { stackView in
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.spacing = 10.0
-        
-        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        stackView.isLayoutMarginsRelativeArrangement = true
-    }
-    let commentImageView = UIImageView().then { imageView in
-        guard let image = UIImage(systemName: "bubble.right") else { return }
-        imageView.image = image
-        imageView.tintColor = .lightGray
-        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-    }
-    let commentDescriptionLabel = UILabel().then { label in
-        label.textColor = .darkGray
-        label.font = .systemFont(ofSize: 15)
-    }
+    let commentInfoStackView = CommentInfoStackView()
     
     let thickSeparator = SeparatorView(of: .thick)
     
@@ -77,7 +63,7 @@ class BoardViewCell: UITableViewCell {
     }
     
     func configure() {
-        commentDescriptionLabel.text = "댓글쓰기"
+        commentInfoStackView.descriptionLabel.text = "댓글쓰기"
         selectionStyle = .none
     }
     
@@ -97,9 +83,7 @@ class BoardViewCell: UITableViewCell {
         addSubview(defaultSeparator)
         
         // Comment
-        contentStackView.addArrangedSubview(commentHStackView)
-        commentHStackView.addArrangedSubview(commentImageView)
-        commentHStackView.addArrangedSubview(commentDescriptionLabel)
+        contentStackView.addArrangedSubview(commentInfoStackView)
         
         addSubview(thickSeparator)
     }
