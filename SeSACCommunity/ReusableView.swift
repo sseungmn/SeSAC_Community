@@ -148,3 +148,36 @@ final class FloatingButton: UIButton {
         setPreferredSymbolConfiguration(symbolConfiuration, forImageIn: .normal)
     }
 }
+
+class CommentInfoStackView: UIStackView {
+    
+    let iconImageView = UIImageView().then { imageView in
+        imageView.image = UIImage(systemName: "bubble.right")!
+        imageView.tintColor = .lightGray
+        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    }
+    let descriptionLabel = UILabel().then { label in
+        label.textColor = .darkGray
+        label.font = .systemFont(ofSize: 15)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        axis = .horizontal
+        distribution = .fill
+        spacing = 10.0
+        layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        isLayoutMarginsRelativeArrangement = true
+        
+        addArrangedSubview(iconImageView)
+        addArrangedSubview(descriptionLabel)
+    }
+}
