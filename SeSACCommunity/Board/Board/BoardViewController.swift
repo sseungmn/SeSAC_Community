@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoardViewController: BaseViewController {
+class BoardViewController: BaseViewController, UINavigationMemeber {
     
     var board = [Post]()
     
@@ -20,13 +20,13 @@ class BoardViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationTitle = "새싹당근농장"
         mainView.setDelegate(self)
         APIService.requestPostRead { board, error in
             guard let board = board else {
                 return
             }
             self.board = board
-            print(board)
             DispatchQueue.main.async {
                 self.mainView.tableView.reloadData()
             }
@@ -43,7 +43,6 @@ class BoardViewController: BaseViewController {
     
     override func configure() {
         let image = UIImage(systemName: "pencil")!.withRenderingMode(.alwaysTemplate)
-        addFloatingButton.tintColor = .white
         addFloatingButton.setImage(image, for: .normal)
     }
 }

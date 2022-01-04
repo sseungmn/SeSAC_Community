@@ -32,7 +32,8 @@ class BoardView: BaseView {
     override func setConstraint() {
         addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.left.right.bottom.equalToSuperview()
         }
     }
 }

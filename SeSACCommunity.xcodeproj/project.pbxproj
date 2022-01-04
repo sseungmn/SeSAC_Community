@@ -196,8 +196,8 @@
 		B5C0C4B4278372B700BD24CA /* Board */ = {
 			isa = PBXGroup;
 			children = (
-				B54DCC76278203110065BF4D /* BoardView.swift */,
 				B54DCC78278203170065BF4D /* BoardViewCell.swift */,
+				B54DCC76278203110065BF4D /* BoardView.swift */,
 				B54DCC7A278206FC0065BF4D /* BoardViewController.swift */,
 			);
 			path = Board;

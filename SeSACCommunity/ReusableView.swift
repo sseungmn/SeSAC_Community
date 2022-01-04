@@ -80,7 +80,7 @@ final class SeparatorView: UIView {
     convenience init(of type: SeparatorType) {
         self.init(frame: .zero)
         switch type {
-        case .default: self.height = 3.0
+        case .default: self.height = 1.0
         case .thick: self.height = 8.0
         }
     }
@@ -136,12 +136,15 @@ final class FloatingButton: UIButton {
     
     private func configure() {
         backgroundColor = .themeColor
+        tintColor = .white
+        
         layer.shadowColor = shadowColor.cgColor
         layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 2.0
         layer.masksToBounds = false
         layer.cornerRadius = cornerRadius
+        
         setPreferredSymbolConfiguration(symbolConfiuration, forImageIn: .normal)
     }
 }
