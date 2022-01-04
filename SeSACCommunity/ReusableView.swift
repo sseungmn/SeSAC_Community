@@ -85,10 +85,10 @@ final class SeparatorView: UIView {
         }
     }
     
-    func setFrame(from bounds: CGRect) {
-        var frame = bounds
-        frame = CGRect(x: 0,
-                       y: frame.size.height - height,
+    func setFrame(from targetFrame: CGRect) {
+        var frame = targetFrame
+        frame = CGRect(x: frame.origin.x,
+                       y: frame.origin.y + frame.size.height - height,
                        width: frame.size.width,
                        height: height)
         self.frame = frame
