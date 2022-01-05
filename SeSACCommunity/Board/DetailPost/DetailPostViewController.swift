@@ -13,12 +13,16 @@ class DetailPostViewController: BaseViewController {
     var refreshControl = UIRefreshControl()
 
     let mainView = DetailPostView()
+    var postID: Int?
     var post: Post?
     var comments: Comments?
     
+    override func viewWillAppear(_ animated: Bool) {
+        reloadView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchBoard()
         initRefresh(with: mainView.scrollView)
     }
     
@@ -34,24 +38,36 @@ class DetailPostViewController: BaseViewController {
         mainView.commentTableView.dataSource = self
     }
     
-    func fetchBoard() {
-        guard let post = post else { return }
-        mainView.usernameLabel.text = post.user.username
-        mainView.dateLabel.text = post.createdAt
-        mainView.postBodyLabel.text = post.text
-        mainView.commentInfoStackView.descriptionLabel.text = "댓글 \(post.comments.count)"
-        fetchComment(postID: post.id)
+    func requestPost() {
+        guard let postID = postID else { return }
+        APIService.requestReadSpecificPost(postID: postID) { [weak self] post, error in
+            guard error == nil else {
+                print(error!)
+                return
+            }
+            guard let post = post else { return }
+
+            DispatchQueue.main.async {
+                self?.mainView.usernameLabel.text = post.user.username
+                self?.mainView.dateLabel.text = post.createdAt
+                self?.mainView.postBodyLabel.text = post.text
+                self?.mainView.commentInfoStackView.descriptionLabel.text = "댓글 \(post.comments.count)"
+                self?.requestComment(postID: post.id)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self?.mainView.drawSeparator()
+                }
+            }
+        }
     }
     
-    func fetchComment(postID: Int) {
-        APIService.requestCommentRead(postID: postID) { comments, error in
+    func requestComment(postID: Int) {
+        APIService.requestReadComment(postID: postID) { comments, error in
             guard error == nil else {
-                print(error)
+                print(error!)
                 return
             }
             guard let comments = comments else { return }
             self.comments = comments
-            print(comments)
             DispatchQueue.main.async { [weak self] in
                 self?.mainView.commentTableView.reloadData()
             }
@@ -77,10 +93,9 @@ extension DetailPostViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension DetailPostViewController: Refreshable {
-    func refreshAction() {
-        print("DetailPostView Refreshed")
-        fetchBoard()
+    func reloadView() {
+        print("DetailPostView Reloaded")
+        requestPost()
         mainView.commentTableView.reloadData()
-        self.refreshControl.endRefreshing()
     }
 }

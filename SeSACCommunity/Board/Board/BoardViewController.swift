@@ -29,9 +29,9 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
     }
     
     func fetchBoard() {
-        APIService.requestPostRead { board, error in
+        APIService.requestReadPost { board, error in
             guard error == nil else {
-                print(error)
+                print(error!)
                 return
 
             }
@@ -41,6 +41,17 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
                 self.mainView.tableView.reloadData()
             }
         }
+    }
+    
+    override func subscribe() {
+        addFloatingButton.rx.tap
+            .subscribe { [weak self] _ in
+                let vc = PostEditorViewController()
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                self?.presentVC(of: nav)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func setConstraint() {
@@ -78,16 +89,22 @@ extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let post = board[indexPath.row]
         let vc = DetailPostViewController()
-        vc.post = post
+        vc.postID = post.id
         pushVC(of: vc)
     }
 }
 
+// MARK: Scroll Refrech Action
 extension BoardViewController: Refreshable {
-    func refreshAction() {
-        print("refresh")
+    func reloadView() {
+        print("BoardView Reloaded")
         self.fetchBoard()
         self.mainView.tableView.reloadData()
-        self.refreshControl.endRefreshing()
+    }
+}
+
+extension BoardViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        self.reloadView()
     }
 }

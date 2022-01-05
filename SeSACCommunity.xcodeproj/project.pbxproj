@@ -11,6 +11,8 @@
 		B50406A42785907300B998EC /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50406A32785907300B998EC /* CommentTableViewCell.swift */; };
 		B50406A62785A7E600B998EC /* CommentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50406A52785A7E600B998EC /* CommentTableView.swift */; };
 		B50406A92785E51C00B998EC /* Refreshable+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50406A82785E51C00B998EC /* Refreshable+Protocol.swift */; };
+		B50406AF2785EC1200B998EC /* PostEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50406AE2785EC1200B998EC /* PostEditorView.swift */; };
+		B50406B22785EC2B00B998EC /* PostEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50406B12785EC2B00B998EC /* PostEditorViewController.swift */; };
 		B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */; };
 		B54DCC61278191030065BF4D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC60278191030065BF4D /* SignUpView.swift */; };
 		B54DCC63278193B20065BF4D /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC62278193B20065BF4D /* ReusableView.swift */; };
@@ -44,6 +46,8 @@
 		B50406A32785907300B998EC /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		B50406A52785A7E600B998EC /* CommentTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableView.swift; sourceTree = "<group>"; };
 		B50406A82785E51C00B998EC /* Refreshable+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Refreshable+Protocol.swift"; sourceTree = "<group>"; };
+		B50406AE2785EC1200B998EC /* PostEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorView.swift; sourceTree = "<group>"; };
+		B50406B12785EC2B00B998EC /* PostEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorViewController.swift; sourceTree = "<group>"; };
 		B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
 		B54DCC60278191030065BF4D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B54DCC62278193B20065BF4D /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
@@ -95,6 +99,27 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B50406AD2785EB8B00B998EC /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				B5ABA6502780A02A00E40C2A /* BaseView.swift */,
+				B5C0C4AE2783381200BD24CA /* BaseViewController.swift */,
+				B54DCC62278193B20065BF4D /* ReusableView.swift */,
+				B50406A82785E51C00B998EC /* Refreshable+Protocol.swift */,
+				B54DCC662781BD190065BF4D /* APIService.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		B50406B02785EC1700B998EC /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				B50406AE2785EC1200B998EC /* PostEditorView.swift */,
+				B50406B12785EC2B00B998EC /* PostEditorViewController.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
 		B54DCC702781E8980065BF4D /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +150,7 @@
 		B54DCC75278202FF0065BF4D /* Board */ = {
 			isa = PBXGroup;
 			children = (
+				B50406B02785EC1700B998EC /* Editor */,
 				B5C0C4B5278372C200BD24CA /* DetailPost */,
 				B5C0C4B4278372B700BD24CA /* Board */,
 			);
@@ -179,11 +205,6 @@
 				B54DCC75278202FF0065BF4D /* Board */,
 				B5ABA64B27809C7A00E40C2A /* Project */,
 				B54DCC6A2781CB740065BF4D /* Model.swift */,
-				B5ABA6502780A02A00E40C2A /* BaseView.swift */,
-				B5C0C4AE2783381200BD24CA /* BaseViewController.swift */,
-				B54DCC62278193B20065BF4D /* ReusableView.swift */,
-				B50406A82785E51C00B998EC /* Refreshable+Protocol.swift */,
-				B54DCC662781BD190065BF4D /* APIService.swift */,
 			);
 			path = SeSACCommunity;
 			sourceTree = "<group>";
@@ -196,6 +217,7 @@
 				B5ABA64027809C7000E40C2A /* Assets.xcassets */,
 				B5ABA64227809C7000E40C2A /* LaunchScreen.storyboard */,
 				B5ABA64527809C7000E40C2A /* Info.plist */,
+				B50406AD2785EB8B00B998EC /* Reusable */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -382,11 +404,13 @@
 				B5ABA63827809C6F00E40C2A /* AppDelegate.swift in Sources */,
 				B54DCC61278191030065BF4D /* SignUpView.swift in Sources */,
 				B54DCC6F2781CDCE0065BF4D /* SignInViewController.swift in Sources */,
+				B50406B22785EC2B00B998EC /* PostEditorViewController.swift in Sources */,
 				B54DCC692781BD360065BF4D /* URLSession+Extension.swift in Sources */,
 				B54DCC77278203110065BF4D /* BoardView.swift in Sources */,
 				B54DCC672781BD190065BF4D /* APIService.swift in Sources */,
 				B5ABA63A27809C6F00E40C2A /* SceneDelegate.swift in Sources */,
 				B54DCC7B278206FC0065BF4D /* BoardViewController.swift in Sources */,
+				B50406AF2785EC1200B998EC /* PostEditorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

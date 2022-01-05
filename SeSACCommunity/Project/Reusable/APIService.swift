@@ -25,12 +25,13 @@ enum APIRequest {
     case SignIn(identifier: String, password: String)
     case ChangePassword(currentPassword: String, newPassword: String, confirmNewPassword: String)
     //  case CreatePost(text: String, Authorization: String)
-    case PostRead(order: Order)
+    case ReadPost(order: Order)
+    case ReadSpecificPost(postID: Int)
     //  case UpdatePost(postId: String, text: String)
     //  case DeletePost(postId: String)
     //  case CreateComment,
     case ReadComment(postID: Int, order: Order)
-//    UpdateComment, DeleteComment
+    //    UpdateComment, DeleteComment
     
     func URLReqeust() -> URLRequest {
         switch self {
@@ -55,7 +56,12 @@ enum APIRequest {
             
             //    case .CreatePost(let text, let Authorization):
             //      return URLReqeust()
-        case .PostRead:
+        case .ReadPost:
+            var request = URLRequest(url: url)
+            request.httpMethod = Method.GET.rawValue
+            request.addValue(token, forHTTPHeaderField: "Authorization")
+            return request
+        case .ReadSpecificPost:
             var request = URLRequest(url: url)
             request.httpMethod = Method.GET.rawValue
             request.addValue(token, forHTTPHeaderField: "Authorization")
@@ -73,40 +79,45 @@ enum APIRequest {
         }
     }
 }
-
-extension APIRequest {
-    var url: URL {
-        switch self {
-        case .SignUp: return .endPoint("/auth/local/register")
-        case .SignIn: return .endPoint("/auth/local")
-        case .ChangePassword: return .endPoint("/custom/change-password")
-        case .PostRead(let order): return .endPoint("/posts?_sort=created_at:\(order.rawValue)")
-        case .ReadComment(let postID, let order):
-            return .endPoint("/comments?post=\(postID)&_sort=created_at:\(order.rawValue)")
+    
+    extension APIRequest {
+        var url: URL {
+            switch self {
+            case .SignUp: return .endPoint("/auth/local/register")
+            case .SignIn: return .endPoint("/auth/local")
+            case .ChangePassword: return .endPoint("/custom/change-password")
+            case .ReadPost(let order): return .endPoint("/posts?_sort=created_at:\(order.rawValue)")
+            case .ReadSpecificPost(let postID): return
+                    .endPoint("/posts/\(postID)")
+            case .ReadComment(let postID, let order):
+                return .endPoint("/comments?post=\(postID)&_sort=created_at:\(order.rawValue)")
+            }
+        }
+        var token: String {
+            let jwt = UserDefaults.standard.string(forKey: "token") ?? ""
+            return "Bearer \(jwt)"
         }
     }
-    var token: String {
-        let jwt = UserDefaults.standard.string(forKey: "token") ?? ""
-        return "Bearer \(jwt)"
-    }
-}
-
-extension URL {
-    static let baseURL = "http://test.monocoding.com:1231"
     
-    static func endPoint(_ path: String) -> URL {
-        return URL(string: baseURL + path)!
+    extension URL {
+        static let baseURL = "http://test.monocoding.com:1231"
+        
+        static func endPoint(_ path: String) -> URL {
+            return URL(string: baseURL + path)!
+        }
     }
-}
-
-class APIService {
-    static func requestSignIn(identifier: String, password: String, _ completion: @escaping (AccessInfo?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.SignIn(identifier: identifier, password: password).URLReqeust(), completion: completion)
+    
+    class APIService {
+        static func requestSignIn(identifier: String, password: String, _ completion: @escaping (AccessInfo?, APIError?) -> Void) {
+            URLSession.request(endpoint: APIRequest.SignIn(identifier: identifier, password: password).URLReqeust(), completion: completion)
+        }
+        static func requestReadPost(_ completion: @escaping (Board?, APIError?) -> Void) {
+            URLSession.request(endpoint: APIRequest.ReadPost(order: .descending).URLReqeust(), completion: completion)
+        }
+        static func requestReadSpecificPost(postID: Int, _ completion: @escaping (Post?, APIError?) -> Void) {
+            URLSession.request(endpoint: APIRequest.ReadSpecificPost(postID: postID).URLReqeust(), completion: completion)
+        }
+        static func requestReadComment(postID: Int, completion: @escaping (Comments?, APIError?) -> Void) {
+            URLSession.request(endpoint: APIRequest.ReadComment(postID: postID, order: .descending).URLReqeust(), completion: completion)
+        }
     }
-    static func requestPostRead(_ completion: @escaping (Board?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.PostRead(order: .descending).URLReqeust(), completion: completion)
-    }
-    static func requestCommentRead(postID: Int, completion: @escaping (Comments?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.ReadComment(postID: postID, order: .descending).URLReqeust(), completion: completion)
-    }
-}

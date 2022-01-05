@@ -20,7 +20,7 @@ extension UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func showVC(of vc: UIViewController) {
+    func presentVC(of vc: UIViewController) {
         modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
