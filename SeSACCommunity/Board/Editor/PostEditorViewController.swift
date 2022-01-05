@@ -9,11 +9,16 @@ import UIKit
 import RxSwift
 import RxRelay
 
+enum Mode {
+    case create, update
+}
+
 class PostEditorViewController: BaseViewController {
     
     let mainView = PostEditorView()
     
-    var postBody = ""
+    var mode: Mode = .create
+    var post: Post?
     
     let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: nil)
     let saveButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: nil)
@@ -23,6 +28,11 @@ class PostEditorViewController: BaseViewController {
         navigationItem.title = "새싹당근농장 글쓰기"
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = saveButton
+        
+        if let post = post {
+            mainView.postTextView.text = post.text
+            mode = .update
+        }
     }
     
     override func setConstraint() {
@@ -33,14 +43,6 @@ class PostEditorViewController: BaseViewController {
     }
     
     override func subscribe() {
-        mainView.postTextView.rx.text
-            .orEmpty
-            .subscribe { [weak self] value in
-                guard let text = value.element else { return }
-                self?.postBody = text
-            }
-            .disposed(by: disposeBag)
-        
         closeButton.rx.tap
             .subscribe { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
@@ -49,11 +51,24 @@ class PostEditorViewController: BaseViewController {
         
         saveButton.rx.tap
             .subscribe { [weak self] _ in
-                guard let self = self else { return }
-                APIService.requestCreatePost(text: self.postBody) { post, error in
-                    guard error == nil else { return }
-                    DispatchQueue.main.async {
-                        self.dismiss(animated: true, completion: nil)
+                guard let self = self,
+                      let text = self.mainView.postTextView.text else { return }
+                print(text)
+                switch self.mode {
+                case .create:
+                    APIService.requestCreatePost(text: text) { post, error in
+                        guard error == nil else { return }
+                        DispatchQueue.main.async {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
+                case .update:
+                    guard let post = self.post else { return }
+                    APIService.requestUpdatePost(postID: post.id, text: text) { post, error in
+                        guard error == nil else { return }
+                        DispatchQueue.main.async {
+                            self.dismiss(animated: true, completion: nil)
+                        }
                     }
                 }
             }

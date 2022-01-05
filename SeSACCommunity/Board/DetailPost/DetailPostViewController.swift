@@ -21,7 +21,6 @@ class DetailPostViewController: BaseViewController {
                                            style: .plain,
                                            target: self,
                                            action: nil)
-    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
     override func viewWillAppear(_ animated: Bool) {
         reloadView()
@@ -53,7 +52,9 @@ class DetailPostViewController: BaseViewController {
     }
     
     func showActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         guard let postID = postID else { return }
+        
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
             APIService.requestDeletePost(postID: postID) { _, error in
                 guard error == nil else {
@@ -65,7 +66,13 @@ class DetailPostViewController: BaseViewController {
                 }
             }
         }
-        let updateAction = UIAlertAction(title: "수정", style: .default, handler: nil)
+        let updateAction = UIAlertAction(title: "수정", style: .default) { _ in
+            guard let post = self.post else { return }
+            let vc = PostEditorViewController()
+            vc.post = post
+            self.presentVC(of: vc)
+        }
+        
         let cancelAction = UIAlertAction(title: "닫기", style: .cancel, handler: nil)
         actionSheet.addAction(deleteAction)
         actionSheet.addAction(updateAction)
@@ -81,6 +88,7 @@ class DetailPostViewController: BaseViewController {
                 return
             }
             guard let post = post else { return }
+            self?.post = post
 
             DispatchQueue.main.async {
                 self?.mainView.usernameLabel.text = post.user.username

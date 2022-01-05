@@ -27,7 +27,7 @@ enum APIRequest {
     case CreatePost(text: String)
     case ReadPost(order: Order)
     case ReadSpecificPost(postID: Int)
-    case UpdatePost(postID: String, text: String)
+    case UpdatePost(postID: Int, text: String)
     case DeletePost(postID: Int)
     //  case CreateComment,
     case ReadComment(postID: Int, order: Order)
@@ -73,10 +73,12 @@ enum APIRequest {
             request.addValue(token, forHTTPHeaderField: "Authorization")
             return request
             
-        case .UpdatePost(let postId, let text):
+        case .UpdatePost(_, let text):
             var request = URLRequest(url: url)
             request.httpMethod = Method.PUT.rawValue
+            request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
             request.addValue(token, forHTTPHeaderField: "Authorization")
+            request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             return request
             
         case .DeletePost:
@@ -137,6 +139,9 @@ enum APIRequest {
         }
         static func requestCreatePost(text: String, _ completion: @escaping (Post?, APIError?) -> Void) {
             URLSession.request(endpoint: APIRequest.CreatePost(text: text).URLReqeust(), completion: completion)
+        }
+        static func requestUpdatePost(postID: Int, text: String, _ completion: @escaping (Post?, APIError?) -> Void) {
+            URLSession.request(endpoint: APIRequest.UpdatePost(postID: postID, text: text).URLReqeust(), completion: completion)
         }
         static func requestDeletePost(postID: Int, _ completion: @escaping (Post?, APIError?) -> Void) {
             URLSession.request(endpoint: APIRequest.DeletePost(postID: postID).URLReqeust(), completion: completion)
