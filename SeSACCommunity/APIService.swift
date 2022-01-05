@@ -23,7 +23,9 @@ enum APIRequest {
     case PostRead
     //  case UpdatePost(postId: String, text: String)
     //  case DeletePost(postId: String)
-    //  case CreateComment, ReadComment, UpdateComment, DeleteComment
+    //  case CreateComment,
+    case ReadComment(postID: Int)
+//    UpdateComment, DeleteComment
     
     func URLReqeust() -> URLRequest {
         switch self {
@@ -58,6 +60,11 @@ enum APIRequest {
             //      return URLReqeust()
             //    case .DeletePost(let postId, let Authorization):
             //      return URLReqeust()
+        case .ReadComment:
+            var request = URLRequest(url: url)
+            request.httpMethod = Method.GET.rawValue
+            request.addValue(token, forHTTPHeaderField: "Authorization")
+            return request
         }
     }
 }
@@ -69,6 +76,7 @@ extension APIRequest {
         case .SignIn: return .endPoint("/auth/local")
         case .ChangePassword: return .endPoint("/custom/change-password")
         case .PostRead: return .endPoint("/posts")
+        case .ReadComment(postID: let postID): return .endPoint("/comments?post=\(postID)")
         }
     }
     var token: String {
@@ -91,5 +99,8 @@ class APIService {
     }
     static func requestPostRead(_ completion: @escaping (Board?, APIError?) -> Void) {
         URLSession.request(endpoint: APIRequest.PostRead.URLReqeust(), completion: completion)
+    }
+    static func requestCommentRead(postID: Int,_ completion: @escaping (Comments?, APIError?) -> Void) {
+        URLSession.request(endpoint: APIRequest.ReadComment(postID: postID).URLReqeust(), completion: completion)
     }
 }

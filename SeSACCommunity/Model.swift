@@ -28,7 +28,7 @@ struct Post: Codable {
     let text: String
     let user: User
     let createdAt, updatedAt: String
-    let comments: [Comment]
+    let comments: [DummyComment]
     
     enum CodingKeys: String, CodingKey {
         case id, text, user
@@ -38,15 +38,18 @@ struct Post: Codable {
     }
 }
 
+struct DummyComment: Codable {}
+
+typealias Comments = [Comment]
 // MARK: Comment
 struct Comment: Codable {
     let id: Int
     let comment: String
-    let user, post: Int
+    let user: User
     let createdAt, updatedAt: String
     
     enum CodingKeys: String, CodingKey {
-        case id, comment, user, post
+        case id, comment, user
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

@@ -42,6 +42,8 @@ extension URLSession {
                 let userData = try JSONDecoder().decode(Model.self, from: data)
                 completion(userData, nil)
             } catch {
+                let rawData = String(data: data, encoding: .utf8)
+                print(rawData)
                 completion(nil, .invalidData)
             }
             

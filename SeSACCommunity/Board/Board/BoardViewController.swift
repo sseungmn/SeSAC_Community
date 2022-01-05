@@ -23,9 +23,12 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
         navigationTitle = "새싹당근농장"
         mainView.setDelegate(self)
         APIService.requestPostRead { board, error in
-            guard let board = board else {
+            guard error == nil else {
+                print(error)
                 return
+
             }
+            guard let board = board else { return }
             self.board = board
             DispatchQueue.main.async {
                 self.mainView.tableView.reloadData()
@@ -54,9 +57,21 @@ extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: "post", for: indexPath) as? BoardTableViewCell else { return UITableViewCell() }
-        cell.bodyLabel.text = board[indexPath.row].text
-        cell.userNameLabel.text = board[indexPath.row].user.username
-        cell.dateLabel.text = board[indexPath.row].updatedAt
+        let post = board[indexPath.row]
+        print("\(post.id) : \(post.text)")
+        cell.bodyLabel.text = post.text
+        cell.userNameLabel.text = post.user.username
+        cell.dateLabel.text = post.updatedAt
+        switch post.comments.count {
+        case 0: cell.commentInfoStackView.descriptionLabel.text = "댓글 쓰기"
+        default: cell.commentInfoStackView.descriptionLabel.text = "댓글 \(post.comments.count)"
+        }
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let post = board[indexPath.row]
+        let vc = DetailPostViewController()
+        vc.post = post
+        pushVC(of: vc)
     }
 }

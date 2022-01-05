@@ -60,7 +60,7 @@ final class DetailPostView: BaseView {
     private let separator2 = SeparatorView(of: .default)
     
     // MARK: CommentInfo
-    private let commentInfoStackView = CommentInfoStackView()
+    let commentInfoStackView = CommentInfoStackView()
     
     private let separator3 = SeparatorView(of: .default)
     
