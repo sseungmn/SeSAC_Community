@@ -24,7 +24,7 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
         super.viewDidLoad()
         navigationTitle = "새싹당근농장"
         mainView.setDelegate(self)
-        initRefresh()
+        initRefresh(with: mainView.tableView)
         fetchBoard()
     }
     
@@ -65,7 +65,7 @@ extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: "post", for: indexPath) as? BoardTableViewCell else { return UITableViewCell() }
         let post = board[indexPath.row]
-        print("\(post.id) : \(post.text)")
+        print("===============\n\(post.id)\n\(post.text)")
         cell.bodyLabel.text = post.text
         cell.userNameLabel.text = post.user.username
         cell.dateLabel.text = post.updatedAt
@@ -83,28 +83,11 @@ extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension BoardViewController {
+extension BoardViewController: Refreshable {
     func refreshAction() {
         print("refresh")
         self.fetchBoard()
         self.mainView.tableView.reloadData()
         self.refreshControl.endRefreshing()
-    }
-    
-    func initRefresh() {
-        self.mainView.tableView.refreshControl = refreshControl
-
-        let refresh = refreshControl.rx.controlEvent(.valueChanged)
-            .observe(on: MainScheduler.instance)
-            .share(replay: 1, scope: .whileConnected)
-
-        refresh
-            .subscribe { [weak self] _ in
-                print("refresh")
-                self?.fetchBoard()
-                self?.mainView.tableView.reloadData()
-                self?.refreshControl.endRefreshing()
-            }
-            .disposed(by: disposeBag)
     }
 }

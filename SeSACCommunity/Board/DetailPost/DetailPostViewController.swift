@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
 class DetailPostViewController: BaseViewController {
+    
+    var refreshControl = UIRefreshControl()
 
     let mainView = DetailPostView()
     var post: Post?
@@ -15,6 +18,8 @@ class DetailPostViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchBoard()
+        initRefresh(with: mainView.scrollView)
     }
     
     override func setConstraint() {
@@ -27,15 +32,19 @@ class DetailPostViewController: BaseViewController {
     override func configure() {
         mainView.commentTableView.delegate = self
         mainView.commentTableView.dataSource = self
-        
-        view.backgroundColor = .white
-        
+    }
+    
+    func fetchBoard() {
         guard let post = post else { return }
         mainView.usernameLabel.text = post.user.username
         mainView.dateLabel.text = post.createdAt
         mainView.postBodyLabel.text = post.text
         mainView.commentInfoStackView.descriptionLabel.text = "댓글 \(post.comments.count)"
-        APIService.requestCommentRead(postID: post.id) { comments, error in
+        fetchComment(postID: post.id)
+    }
+    
+    func fetchComment(postID: Int) {
+        APIService.requestCommentRead(postID: postID) { comments, error in
             guard error == nil else {
                 print(error)
                 return
@@ -58,14 +67,20 @@ extension DetailPostViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = mainView.commentTableView.dequeueReusableCell(withIdentifier: "cell") as? CommentTableViewCell else { return UITableViewCell() }
-        let color =  UIColor(red: .random(in: 0...1),
-                             green: .random(in: 0...1),
-                             blue: .random(in: 0...1),
-                             alpha: 0.5)
-        cell.backgroundColor = color
+        
+        cell.backgroundColor = .randomColor
         guard let commnet = comments?[indexPath.row] else { return UITableViewCell() }
         cell.usernameLabel.text = commnet.user.username
         cell.commentLabel.text = commnet.comment
         return cell
+    }
+}
+
+extension DetailPostViewController: Refreshable {
+    func refreshAction() {
+        print("DetailPostView Refreshed")
+        fetchBoard()
+        mainView.commentTableView.reloadData()
+        self.refreshControl.endRefreshing()
     }
 }

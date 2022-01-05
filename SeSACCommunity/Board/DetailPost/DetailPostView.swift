@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailPostView: BaseView {
     // MARK: - Variable
-    private let scrollView = UIScrollView()
+    let scrollView = UIScrollView()
     
     private let contentStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
@@ -150,7 +150,7 @@ It's okay 괜찮아 난 맛이라도 봤잖아
         
         contentStackView.addArrangedSubview(commentTableView)
         
-        addSubview(separator4)
+        contentStackView.addArrangedSubview(separator4)
         
         addSubview(commentTextField)
         commentTextField.snp.makeConstraints { make in
