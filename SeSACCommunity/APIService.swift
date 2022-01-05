@@ -16,15 +16,20 @@ enum APIRequest {
         case DEL = "DELETE"
     }
     
+    enum Order: String {
+        case ascending = "asc"
+        case descending = "desc"
+    }
+    
     case SignUp(username: String, email: String, password: String)
     case SignIn(identifier: String, password: String)
     case ChangePassword(currentPassword: String, newPassword: String, confirmNewPassword: String)
     //  case CreatePost(text: String, Authorization: String)
-    case PostRead
+    case PostRead(order: Order)
     //  case UpdatePost(postId: String, text: String)
     //  case DeletePost(postId: String)
     //  case CreateComment,
-    case ReadComment(postID: Int)
+    case ReadComment(postID: Int, order: Order)
 //    UpdateComment, DeleteComment
     
     func URLReqeust() -> URLRequest {
@@ -75,8 +80,9 @@ extension APIRequest {
         case .SignUp: return .endPoint("/auth/local/register")
         case .SignIn: return .endPoint("/auth/local")
         case .ChangePassword: return .endPoint("/custom/change-password")
-        case .PostRead: return .endPoint("/posts")
-        case .ReadComment(postID: let postID): return .endPoint("/comments?post=\(postID)")
+        case .PostRead(let order): return .endPoint("/posts?_sort=created_at:\(order.rawValue)")
+        case .ReadComment(let postID, let order):
+            return .endPoint("/comments?post=\(postID)&_sort=created_at:\(order.rawValue)")
         }
     }
     var token: String {
@@ -98,9 +104,9 @@ class APIService {
         URLSession.request(endpoint: APIRequest.SignIn(identifier: identifier, password: password).URLReqeust(), completion: completion)
     }
     static func requestPostRead(_ completion: @escaping (Board?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.PostRead.URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.PostRead(order: .descending).URLReqeust(), completion: completion)
     }
-    static func requestCommentRead(postID: Int,_ completion: @escaping (Comments?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.ReadComment(postID: postID).URLReqeust(), completion: completion)
+    static func requestCommentRead(postID: Int, completion: @escaping (Comments?, APIError?) -> Void) {
+        URLSession.request(endpoint: APIRequest.ReadComment(postID: postID, order: .descending).URLReqeust(), completion: completion)
     }
 }
