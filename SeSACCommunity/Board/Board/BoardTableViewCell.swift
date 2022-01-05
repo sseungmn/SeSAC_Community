@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoardViewCell: UITableViewCell {
+class BoardTableViewCell: UITableViewCell {
     let contentStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
         stackView.distribution = .fill

@@ -53,7 +53,7 @@ extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: "post", for: indexPath) as? BoardViewCell else { return UITableViewCell() }
+        guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: "post", for: indexPath) as? BoardTableViewCell else { return UITableViewCell() }
         cell.bodyLabel.text = board[indexPath.row].text
         cell.userNameLabel.text = board[indexPath.row].user.username
         cell.dateLabel.text = board[indexPath.row].updatedAt
