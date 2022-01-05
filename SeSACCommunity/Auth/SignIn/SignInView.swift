@@ -17,8 +17,8 @@ class SignInView: BaseView {
     }
     
     // MARK: Accesable Variable
-    var nickNameTextFeild = CustomTextField()
-    var passwordTextFeild = CustomTextField()
+    var nickNameTextFeild = FormTextField()
+    var passwordTextFeild = FormTextField()
     var confirmButton = CustomButton().then { button in
         button.setTitle("로그인", for: .normal)
     }

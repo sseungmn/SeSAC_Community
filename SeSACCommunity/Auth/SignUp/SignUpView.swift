@@ -17,10 +17,10 @@ final class SignUpView: BaseView {
     }
     
     // MARK: Accessable Variable
-    var emailTextFeild = CustomTextField()
-    var nickNameTextFeild = CustomTextField()
-    var passwordTextFeild = CustomTextField()
-    var passwordCheckTextFeild = CustomTextField()
+    var emailTextFeild = FormTextField()
+    var nickNameTextFeild = FormTextField()
+    var passwordTextFeild = FormTextField()
+    var passwordCheckTextFeild = FormTextField()
     var confirmButton = CustomButton().then { button in
         button.setTitle("가입하기", for: .disabled)
         button.setTitle("시작하기", for: .normal)
