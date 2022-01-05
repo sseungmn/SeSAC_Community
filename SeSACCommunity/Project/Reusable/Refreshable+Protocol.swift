@@ -11,7 +11,7 @@ import RxSwift
 protocol Refreshable where Self: BaseViewController {
     var refreshControl: UIRefreshControl { get set }
     func initRefresh<View: UIScrollView>(with refreshableView: View)
-    func refreshAction()
+    func reloadView()
 }
 
 extension Refreshable {
@@ -24,7 +24,8 @@ extension Refreshable {
         
         refresh
             .subscribe { [weak self] _ in
-                self?.refreshAction()
+                self?.reloadView()
+                self?.refreshControl.endRefreshing()
             }
             .disposed(by: disposeBag)
     }
