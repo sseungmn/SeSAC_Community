@@ -9,20 +9,20 @@ import UIKit
 
 final class DetailPostView: BaseView {
     // MARK: - Variable
-    let scrollView = UIScrollView()
+    private let scrollView = UIScrollView()
     
-    let contentStackView = UIStackView().then { stackView in
+    private let contentStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
     }
     
-    let postStackView = UIStackView().then { stackView in
+    private let postStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
         
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         stackView.isLayoutMarginsRelativeArrangement = true
     }
     // MARK: PostInfo
-    let postInfoHStackView = UIStackView().then { stackView in
+    private let postInfoHStackView = UIStackView().then { stackView in
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.spacing = 10
@@ -30,11 +30,11 @@ final class DetailPostView: BaseView {
         stackView.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
         stackView.isLayoutMarginsRelativeArrangement = true
     }
-    let postInfoVStackView = UIStackView().then { stackView in
+    private let postInfoVStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
     }
-    let userImageView = UIImageView().then { imageView in
+    private let userImageView = UIImageView().then { imageView in
         imageView.image = UIImage(systemName: "person.circle.fill")
         imageView.tintColor = .lightGray
     }
@@ -46,10 +46,10 @@ final class DetailPostView: BaseView {
         label.textColor = .lightGray
     }
     
-    let separator1 = SeparatorView(of: .default)
+    private let separator1 = SeparatorView(of: .default)
     
     // MARK: Post Body
-    let postBodyStackView = UIStackView().then { stackView in
+    private let postBodyStackView = UIStackView().then { stackView in
         stackView.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
         stackView.isLayoutMarginsRelativeArrangement = true
     }
@@ -57,19 +57,19 @@ final class DetailPostView: BaseView {
         label.numberOfLines = 0
     }
     
-    let separator2 = SeparatorView(of: .default)
+    private let separator2 = SeparatorView(of: .default)
     
     // MARK: CommentInfo
-    let commentInfoStackView = CommentInfoStackView()
+    private let commentInfoStackView = CommentInfoStackView()
     
-    let separator3 = SeparatorView(of: .default)
+    private let separator3 = SeparatorView(of: .default)
     
     // MARK: Comment
     let commentTableView = CommentTableView()
     
-    let separator4 = SeparatorView(of: .default)
+    private let separator4 = SeparatorView(of: .default)
     
-    let commentTextField = InsetTextField().then { textField in
+    private let commentTextField = InsetTextField().then { textField in
         textField.placeholder = "댓글을 입력해주세요"
         textField.layer.cornerRadius = 15
         textField.backgroundColor = .systemGray5

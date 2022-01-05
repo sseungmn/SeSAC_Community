@@ -9,13 +9,13 @@ import UIKit
 
 class CommentTableViewCell: UITableViewCell {
     
-    let VstackView = UIStackView().then { stackView in
+    private let VstackView = UIStackView().then { stackView in
         stackView.axis = .vertical
         
         stackView.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         stackView.isLayoutMarginsRelativeArrangement = true
     }
-    let HstackView = UIStackView().then { stackView in
+    private let HstackView = UIStackView().then { stackView in
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
     }
@@ -42,7 +42,7 @@ class CommentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setConstraint() {
+    private func setConstraint() {
         addSubview(VstackView)
         VstackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -55,7 +55,7 @@ class CommentTableViewCell: UITableViewCell {
         VstackView.addArrangedSubview(commentLabel)
     }
     
-    func configure() {
+    private func configure() {
         usernameLabel.text = "테이크아웃 좋아"
         commentLabel.text = "연말이라 슬럼프가 오고 있어요 도와주세요!!!\n빠르게\n회복\n해야합니다!!!!"
     }
