@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0CEF911681805D32344E1DD8 /* Pods_SeSACCommunity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC09D00BEAFFF33B86B1D30 /* Pods_SeSACCommunity.framework */; };
+		B50406A42785907300B998EC /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50406A32785907300B998EC /* CommentTableViewCell.swift */; };
 		B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */; };
 		B54DCC61278191030065BF4D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC60278191030065BF4D /* SignUpView.swift */; };
 		B54DCC63278193B20065BF4D /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC62278193B20065BF4D /* ReusableView.swift */; };
@@ -19,7 +20,7 @@
 		B54DCC6F2781CDCE0065BF4D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC6E2781CDCE0065BF4D /* SignInViewController.swift */; };
 		B54DCC742781FB540065BF4D /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC732781FB540065BF4D /* UIViewController+Extension.swift */; };
 		B54DCC77278203110065BF4D /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC76278203110065BF4D /* BoardView.swift */; };
-		B54DCC79278203170065BF4D /* BoardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC78278203170065BF4D /* BoardViewCell.swift */; };
+		B54DCC79278203170065BF4D /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC78278203170065BF4D /* BoardTableViewCell.swift */; };
 		B54DCC7B278206FC0065BF4D /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC7A278206FC0065BF4D /* BoardViewController.swift */; };
 		B58200252780AE7C007DAC5E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B58200242780AE7C007DAC5E /* .swiftlint.yml */; };
 		B5820029278178A1007DAC5E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5820028278178A1007DAC5E /* UIColor+Extension.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		5C1B5AC829BAFC773AB5249F /* Pods-SeSACCommunity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACCommunity.release.xcconfig"; path = "Target Support Files/Pods-SeSACCommunity/Pods-SeSACCommunity.release.xcconfig"; sourceTree = "<group>"; };
 		916EB1ACC1F0B75D8A566A75 /* Pods-SeSACCommunity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACCommunity.debug.xcconfig"; path = "Target Support Files/Pods-SeSACCommunity/Pods-SeSACCommunity.debug.xcconfig"; sourceTree = "<group>"; };
+		B50406A32785907300B998EC /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
 		B54DCC60278191030065BF4D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B54DCC62278193B20065BF4D /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
@@ -49,7 +51,7 @@
 		B54DCC6E2781CDCE0065BF4D /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B54DCC732781FB540065BF4D /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		B54DCC76278203110065BF4D /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
-		B54DCC78278203170065BF4D /* BoardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewCell.swift; sourceTree = "<group>"; };
+		B54DCC78278203170065BF4D /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		B54DCC7A278206FC0065BF4D /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		B58200242780AE7C007DAC5E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B5820028278178A1007DAC5E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -196,7 +198,7 @@
 		B5C0C4B4278372B700BD24CA /* Board */ = {
 			isa = PBXGroup;
 			children = (
-				B54DCC78278203170065BF4D /* BoardViewCell.swift */,
+				B54DCC78278203170065BF4D /* BoardTableViewCell.swift */,
 				B54DCC76278203110065BF4D /* BoardView.swift */,
 				B54DCC7A278206FC0065BF4D /* BoardViewController.swift */,
 			);
@@ -208,6 +210,7 @@
 			children = (
 				B5C0C4B22783725900BD24CA /* DetailPostView.swift */,
 				B5C0C4B62783772600BD24CA /* DetailPostViewController.swift */,
+				B50406A32785907300B998EC /* CommentTableViewCell.swift */,
 			);
 			path = DetailPost;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				B54DCC65278197A10065BF4D /* SignUpViewController.swift in Sources */,
 				B5820029278178A1007DAC5E /* UIColor+Extension.swift in Sources */,
 				B5ABA64F27809FFF00E40C2A /* WelcomeView.swift in Sources */,
+				B50406A42785907300B998EC /* CommentTableViewCell.swift in Sources */,
 				B54DCC742781FB540065BF4D /* UIViewController+Extension.swift in Sources */,
 				B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */,
 				B5C0C4AF2783381200BD24CA /* BaseViewController.swift in Sources */,
@@ -364,7 +368,7 @@
 				B5C0C4B32783725900BD24CA /* DetailPostView.swift in Sources */,
 				B5C0C4B72783772600BD24CA /* DetailPostViewController.swift in Sources */,
 				B54DCC6B2781CB740065BF4D /* Model.swift in Sources */,
-				B54DCC79278203170065BF4D /* BoardViewCell.swift in Sources */,
+				B54DCC79278203170065BF4D /* BoardTableViewCell.swift in Sources */,
 				B5ABA6512780A02A00E40C2A /* BaseView.swift in Sources */,
 				B54DCC6D2781CD680065BF4D /* SignInView.swift in Sources */,
 				B5ABA63827809C6F00E40C2A /* AppDelegate.swift in Sources */,

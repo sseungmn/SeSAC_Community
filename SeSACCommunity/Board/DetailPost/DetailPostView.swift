@@ -61,27 +61,14 @@ final class DetailPostView: BaseView {
     
     // MARK: CommentInfo
     let commentInfoStackView = CommentInfoStackView()
-//    let commentHStackView = UIStackView().then { stackView in
-//        stackView.axis = .horizontal
-//        stackView.distribution = .fill
-//        stackView.spacing = 10.0
-//
-//        stackView.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-//        stackView.isLayoutMarginsRelativeArrangement = true
-//    }
-//    let commentImageView = UIImageView().then { imageView in
-//        guard let image = UIImage(systemName: "bubble.right") else { return }
-//        imageView.image = image
-//        imageView.tintColor = .lightGray
-//        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-//    }
-//    let commentDescriptionLabel = UILabel().then { label in
-//        label.textColor = .darkGray
-//        label.font = .systemFont(ofSize: 15)
-//    }
     
     let separator3 = SeparatorView(of: .default)
     
+    // MARK: Comment
+    let commentTableView = UITableView().then { tableView in
+        tableView.register(CommentTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.isScrollEnabled = false
+    }
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -106,7 +93,8 @@ final class DetailPostView: BaseView {
         
         scrollView.addSubview(contentStackView)
         contentStackView.snp.makeConstraints { make in
-            make.top.left.right.width.equalToSuperview()
+            make.top.left.right.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
         }
         
         // MARK: Post
@@ -121,17 +109,24 @@ final class DetailPostView: BaseView {
         postInfoVStackView.addArrangedSubview(usernameLabel)
         postInfoVStackView.addArrangedSubview(dateLabel)
         
-        scrollView.addSubview(separator1)
+        contentStackView.addSubview(separator1)
         
         postStackView.addArrangedSubview(postBodyStackView)
         postBodyStackView.addArrangedSubview(postBodyLabel)
         
-        scrollView.addSubview(separator2)
+        contentStackView.addSubview(separator2)
         
         // MARK: CommentInfo
         contentStackView.addArrangedSubview(commentInfoStackView)
         
-        scrollView.addSubview(separator3)
+        contentStackView.addSubview(separator3)
+        
+        contentStackView.addArrangedSubview(commentTableView)
+        commentTableView.snp.makeConstraints { make in
+            make.top.equalTo(commentInfoStackView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(2000)
+        }
     }
     
     // MARK: Set Separator
