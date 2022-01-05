@@ -46,10 +46,7 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
     override func subscribe() {
         addFloatingButton.rx.tap
             .subscribe { [weak self] _ in
-                let vc = PostEditorViewController()
-                let nav = UINavigationController(rootViewController: vc)
-                nav.modalPresentationStyle = .fullScreen
-                self?.presentVC(of: nav)
+                self?.presentVC(of: PostEditorViewController())
             }
             .disposed(by: disposeBag)
     }

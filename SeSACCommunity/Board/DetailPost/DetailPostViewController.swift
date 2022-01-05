@@ -29,7 +29,7 @@ class DetailPostViewController: BaseViewController {
     override func setConstraint() {
         view.addSubview(mainView)
         mainView.snp.makeConstraints { make in
-            make.top.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
