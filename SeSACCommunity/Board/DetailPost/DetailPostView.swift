@@ -65,9 +65,15 @@ final class DetailPostView: BaseView {
     let separator3 = SeparatorView(of: .default)
     
     // MARK: Comment
-    let commentTableView = UITableView().then { tableView in
-        tableView.register(CommentTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.isScrollEnabled = false
+    let commentTableView = CommentTableView()
+    
+    let separator4 = SeparatorView(of: .default)
+    
+    let commentTextField = InsetTextField().then { textField in
+        textField.placeholder = "댓글을 입력해주세요"
+        textField.layer.cornerRadius = 15
+        textField.backgroundColor = .systemGray5
+        textField.tintColor = .black
     }
     // MARK: - Init
     override init(frame: CGRect) {
@@ -80,21 +86,42 @@ final class DetailPostView: BaseView {
     override func configure() {
         usernameLabel.text = "seouh"
         dateLabel.text = "01/04"
-        postBodyLabel.text = "코로나로 인해서 일자리도 많이 줄고 취업하기도 어렵구 씁쓸하네요오"
+        postBodyLabel.text = """
+만남은 쉽고 이별은 어려워
+눈빛에 베일 듯 우린 날카로워
+마침표를 찍고 난 조금 더 멀리 가려 해
+만남은 쉽고 이별은 참 어려워
+아직도 기억나 차 안의 공기가
+처음 들었을 때 마음이 짜릿했던 뭔가가
+6살이었지만 알았었지 뭔가 다르단 건
+그렇게 쉽게 만나게 되는 거야 꿈이란 건
+시간이 흘러서 이제 음악은 내 놀이가 됐고
+듣고 따라만 부르기엔 내게는 뭔가 부족했어
+그래서 실행에 옮겼지 방에서 혼자 꿈만 꾸던 모습
+가사를 쓰고 부를 때 사실 내가 생각했던 건
+돌아가야 할까 나아가야 할까
+환호와 박수 소리를 들을 때 떠나야 할 것 같지 왜
+지금 떠나서 아름다운 기억으로만 간직해
+다들 꿈이란 건 이루지 못한 채 꾸고만 사는데
+It's okay 괜찮아 난 맛이라도 봤잖아
+다시 현실로 돌아가 그래 취직하고 잘 살아
+잘 잊혀지고 있잖아
+그런데 자꾸 왜 난 또 가사를 끄적이는 걸까 yeah
+"""
         commentInfoStackView.descriptionLabel.text = "댓글 4"
     }
     
     override func setConstraint() {
         addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
-            make.top.left.right.width.equalToSuperview()
-            make.bottom.equalToSuperview().inset(100)
+            make.top.right.left.equalToSuperview()
+            make.bottom.equalToSuperview().inset(60)
         }
         
         scrollView.addSubview(contentStackView)
         contentStackView.snp.makeConstraints { make in
-            make.top.left.right.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
         }
         
         // MARK: Post
@@ -116,16 +143,20 @@ final class DetailPostView: BaseView {
         
         contentStackView.addSubview(separator2)
         
-        // MARK: CommentInfo
+        // MARK: Comment
         contentStackView.addArrangedSubview(commentInfoStackView)
         
         contentStackView.addSubview(separator3)
         
         contentStackView.addArrangedSubview(commentTableView)
-        commentTableView.snp.makeConstraints { make in
-            make.top.equalTo(commentInfoStackView.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(2000)
+        
+        addSubview(separator4)
+        
+        addSubview(commentTextField)
+        commentTextField.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.bottom).offset(10)
+            make.left.right.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().inset(10)
         }
     }
     
@@ -134,5 +165,6 @@ final class DetailPostView: BaseView {
         separator1.setFrame(from: postInfoHStackView.frame)
         separator2.setFrame(from: postStackView.frame)
         separator3.setFrame(from: commentInfoStackView.frame)
+        separator4.setFrame(from: commentTableView.frame)
     }
 }

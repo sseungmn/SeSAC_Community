@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0CEF911681805D32344E1DD8 /* Pods_SeSACCommunity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC09D00BEAFFF33B86B1D30 /* Pods_SeSACCommunity.framework */; };
 		B50406A42785907300B998EC /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50406A32785907300B998EC /* CommentTableViewCell.swift */; };
+		B50406A62785A7E600B998EC /* CommentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50406A52785A7E600B998EC /* CommentTableView.swift */; };
 		B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */; };
 		B54DCC61278191030065BF4D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC60278191030065BF4D /* SignUpView.swift */; };
 		B54DCC63278193B20065BF4D /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC62278193B20065BF4D /* ReusableView.swift */; };
@@ -40,6 +41,7 @@
 		5C1B5AC829BAFC773AB5249F /* Pods-SeSACCommunity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACCommunity.release.xcconfig"; path = "Target Support Files/Pods-SeSACCommunity/Pods-SeSACCommunity.release.xcconfig"; sourceTree = "<group>"; };
 		916EB1ACC1F0B75D8A566A75 /* Pods-SeSACCommunity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACCommunity.debug.xcconfig"; path = "Target Support Files/Pods-SeSACCommunity/Pods-SeSACCommunity.debug.xcconfig"; sourceTree = "<group>"; };
 		B50406A32785907300B998EC /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		B50406A52785A7E600B998EC /* CommentTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableView.swift; sourceTree = "<group>"; };
 		B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
 		B54DCC60278191030065BF4D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B54DCC62278193B20065BF4D /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				B5C0C4B22783725900BD24CA /* DetailPostView.swift */,
 				B5C0C4B62783772600BD24CA /* DetailPostViewController.swift */,
 				B50406A32785907300B998EC /* CommentTableViewCell.swift */,
+				B50406A52785A7E600B998EC /* CommentTableView.swift */,
 			);
 			path = DetailPost;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				B54DCC742781FB540065BF4D /* UIViewController+Extension.swift in Sources */,
 				B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */,
 				B5C0C4AF2783381200BD24CA /* BaseViewController.swift in Sources */,
+				B50406A62785A7E600B998EC /* CommentTableView.swift in Sources */,
 				B54DCC63278193B20065BF4D /* ReusableView.swift in Sources */,
 				B5ABA63C27809C6F00E40C2A /* WelcomeViewController.swift in Sources */,
 				B5C0C4B32783725900BD24CA /* DetailPostView.swift in Sources */,

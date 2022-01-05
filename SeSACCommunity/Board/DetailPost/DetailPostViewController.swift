@@ -19,7 +19,6 @@ class DetailPostViewController: BaseViewController {
         view.addSubview(mainView)
         mainView.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.width.equalTo(view)
         }
     }
     
@@ -35,6 +34,7 @@ extension DetailPostViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print(#function)
         guard let cell = mainView.commentTableView.dequeueReusableCell(withIdentifier: "cell") as? CommentTableViewCell else { return UITableViewCell() }
         let color =  UIColor(red: .random(in: 0...1),
                              green: .random(in: 0...1),
