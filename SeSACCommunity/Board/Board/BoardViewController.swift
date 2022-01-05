@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class BoardViewController: BaseViewController, UINavigationMemeber {
     
     var board = [Post]()
+    var refreshControl = UIRefreshControl()
     
     let mainView = BoardView()
     let addFloatingButton = FloatingButton(type: .custom)
@@ -22,6 +24,11 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
         super.viewDidLoad()
         navigationTitle = "새싹당근농장"
         mainView.setDelegate(self)
+        initRefresh()
+        fetchBoard()
+    }
+    
+    func fetchBoard() {
         APIService.requestPostRead { board, error in
             guard error == nil else {
                 print(error)
@@ -73,5 +80,31 @@ extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = DetailPostViewController()
         vc.post = post
         pushVC(of: vc)
+    }
+}
+
+extension BoardViewController {
+    func refreshAction() {
+        print("refresh")
+        self.fetchBoard()
+        self.mainView.tableView.reloadData()
+        self.refreshControl.endRefreshing()
+    }
+    
+    func initRefresh() {
+        self.mainView.tableView.refreshControl = refreshControl
+
+        let refresh = refreshControl.rx.controlEvent(.valueChanged)
+            .observe(on: MainScheduler.instance)
+            .share(replay: 1, scope: .whileConnected)
+
+        refresh
+            .subscribe { [weak self] _ in
+                print("refresh")
+                self?.fetchBoard()
+                self?.mainView.tableView.reloadData()
+                self?.refreshControl.endRefreshing()
+            }
+            .disposed(by: disposeBag)
     }
 }
