@@ -49,7 +49,7 @@ class DetailPostViewController: BaseViewController {
 
             DispatchQueue.main.async {
                 self?.mainView.usernameLabel.text = post.user.username
-                self?.mainView.dateLabel.text = post.createdAt
+                self?.mainView.dateLabel.text = post.createdAt.formattedDate
                 self?.mainView.postBodyLabel.text = post.text
                 self?.mainView.commentInfoStackView.descriptionLabel.text = "댓글 \(post.comments.count)"
                 self?.requestComment(postID: post.id)
