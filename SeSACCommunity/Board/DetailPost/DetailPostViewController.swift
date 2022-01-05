@@ -17,6 +17,12 @@ class DetailPostViewController: BaseViewController {
     var post: Post?
     var comments: Comments?
     
+    let moreActionButton = UIBarButtonItem(image: UIImage(named: "ellipsis.vertical"),
+                                           style: .plain,
+                                           target: self,
+                                           action: nil)
+    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
     override func viewWillAppear(_ animated: Bool) {
         reloadView()
     }
@@ -31,11 +37,40 @@ class DetailPostViewController: BaseViewController {
         mainView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        navigationItem.rightBarButtonItem = moreActionButton
     }
     
     override func configure() {
         mainView.commentTableView.delegate = self
         mainView.commentTableView.dataSource = self
+    }
+    
+    override func subscribe() {
+        moreActionButton.rx.tap
+            .subscribe { _ in
+                self.showActionSheet()
+            }
+    }
+    
+    func showActionSheet() {
+        guard let postID = postID else { return }
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
+            APIService.requestDeletePost(postID: postID) { _, error in
+                guard error == nil else {
+                    print("삭제 불가")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+        let updateAction = UIAlertAction(title: "수정", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "닫기", style: .cancel, handler: nil)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(updateAction)
+        actionSheet.addAction(cancelAction)
+        present(actionSheet, animated: true, completion: nil)
     }
     
     func requestPost() {

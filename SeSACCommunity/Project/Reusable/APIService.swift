@@ -27,8 +27,8 @@ enum APIRequest {
     case CreatePost(text: String)
     case ReadPost(order: Order)
     case ReadSpecificPost(postID: Int)
-    //  case UpdatePost(postId: String, text: String)
-    //  case DeletePost(postId: String)
+    case UpdatePost(postID: String, text: String)
+    case DeletePost(postID: Int)
     //  case CreateComment,
     case ReadComment(postID: Int, order: Order)
     //    UpdateComment, DeleteComment
@@ -66,16 +66,24 @@ enum APIRequest {
             request.httpMethod = Method.GET.rawValue
             request.addValue(token, forHTTPHeaderField: "Authorization")
             return request
+            
         case .ReadSpecificPost:
             var request = URLRequest(url: url)
             request.httpMethod = Method.GET.rawValue
             request.addValue(token, forHTTPHeaderField: "Authorization")
             return request
             
-            //    case .UpdatePost(let postId, let text):
-            //      return URLReqeust()
-            //    case .DeletePost(let postId, let Authorization):
-            //      return URLReqeust()
+        case .UpdatePost(let postId, let text):
+            var request = URLRequest(url: url)
+            request.httpMethod = Method.PUT.rawValue
+            request.addValue(token, forHTTPHeaderField: "Authorization")
+            return request
+            
+        case .DeletePost:
+            var request = URLRequest(url: url)
+            request.httpMethod = Method.DEL.rawValue
+            request.addValue(token, forHTTPHeaderField: "Authorization")
+            return request
         case .ReadComment:
             var request = URLRequest(url: url)
             request.httpMethod = Method.GET.rawValue
@@ -94,9 +102,12 @@ enum APIRequest {
             case .ReadPost(let order): return .endPoint("/posts?_sort=created_at:\(order.rawValue)")
             case .ReadSpecificPost(let postID): return
                     .endPoint("/posts/\(postID)")
+            case .UpdatePost(let postID, _): return .endPoint("/posts/\(postID)")
             case .CreatePost: return .endPoint("/posts")
             case .ReadComment(let postID, let order):
                 return .endPoint("/comments?post=\(postID)&_sort=created_at:\(order.rawValue)")
+            case .DeletePost(let postID):
+                return .endPoint("/posts/\(postID)")
             }
         }
         var token: String {
@@ -126,6 +137,9 @@ enum APIRequest {
         }
         static func requestCreatePost(text: String, _ completion: @escaping (Post?, APIError?) -> Void) {
             URLSession.request(endpoint: APIRequest.CreatePost(text: text).URLReqeust(), completion: completion)
+        }
+        static func requestDeletePost(postID: Int, _ completion: @escaping (Post?, APIError?) -> Void) {
+            URLSession.request(endpoint: APIRequest.DeletePost(postID: postID).URLReqeust(), completion: completion)
         }
         // MARK: Comment
         static func requestReadComment(postID: Int, completion: @escaping (Comments?, APIError?) -> Void) {
