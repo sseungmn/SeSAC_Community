@@ -14,6 +14,8 @@
 		B50406AF2785EC1200B998EC /* PostEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50406AE2785EC1200B998EC /* PostEditorView.swift */; };
 		B50406B22785EC2B00B998EC /* PostEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50406B12785EC2B00B998EC /* PostEditorViewController.swift */; };
 		B50BF08B27861D7900BA09DE /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BF08A27861D7900BA09DE /* String+Extension.swift */; };
+		B50BF0922786DDAD00BA09DE /* CommentEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BF0912786DDAD00BA09DE /* CommentEditorViewController.swift */; };
+		B50BF0952786DDBD00BA09DE /* CommentEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BF0942786DDBD00BA09DE /* CommentEditorView.swift */; };
 		B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */; };
 		B54DCC61278191030065BF4D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC60278191030065BF4D /* SignUpView.swift */; };
 		B54DCC63278193B20065BF4D /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC62278193B20065BF4D /* ReusableView.swift */; };
@@ -50,6 +52,8 @@
 		B50406AE2785EC1200B998EC /* PostEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorView.swift; sourceTree = "<group>"; };
 		B50406B12785EC2B00B998EC /* PostEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorViewController.swift; sourceTree = "<group>"; };
 		B50BF08A27861D7900BA09DE /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		B50BF0912786DDAD00BA09DE /* CommentEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEditorViewController.swift; sourceTree = "<group>"; };
+		B50BF0942786DDBD00BA09DE /* CommentEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEditorView.swift; sourceTree = "<group>"; };
 		B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
 		B54DCC60278191030065BF4D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B54DCC62278193B20065BF4D /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
@@ -118,6 +122,8 @@
 			children = (
 				B50406AE2785EC1200B998EC /* PostEditorView.swift */,
 				B50406B12785EC2B00B998EC /* PostEditorViewController.swift */,
+				B50BF0942786DDBD00BA09DE /* CommentEditorView.swift */,
+				B50BF0912786DDAD00BA09DE /* CommentEditorViewController.swift */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -390,11 +396,13 @@
 				B54DCC65278197A10065BF4D /* SignUpViewController.swift in Sources */,
 				B5820029278178A1007DAC5E /* UIColor+Extension.swift in Sources */,
 				B5ABA64F27809FFF00E40C2A /* WelcomeView.swift in Sources */,
+				B50BF0952786DDBD00BA09DE /* CommentEditorView.swift in Sources */,
 				B50406A42785907300B998EC /* CommentTableViewCell.swift in Sources */,
 				B54DCC742781FB540065BF4D /* UIViewController+Extension.swift in Sources */,
 				B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */,
 				B5C0C4AF2783381200BD24CA /* BaseViewController.swift in Sources */,
 				B50406A62785A7E600B998EC /* CommentTableView.swift in Sources */,
+				B50BF0922786DDAD00BA09DE /* CommentEditorViewController.swift in Sources */,
 				B50BF08B27861D7900BA09DE /* String+Extension.swift in Sources */,
 				B54DCC63278193B20065BF4D /* ReusableView.swift in Sources */,
 				B50406A92785E51C00B998EC /* Refreshable+Protocol.swift in Sources */,

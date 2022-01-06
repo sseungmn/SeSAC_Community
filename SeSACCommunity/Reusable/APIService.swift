@@ -7,7 +7,7 @@
 
 import Foundation
 enum APIError: Error {
-    case failed, noData, invalidResponse, serverError, tokenExpired, invalidRequest, invalidData
+    case failed, statusCodeFailed,noData, invalidResponse, serverError, tokenExpired, invalidRequest, invalidData
 }
 
 enum APIRequest {
@@ -33,7 +33,8 @@ enum APIRequest {
     
     case CreateComment(comment: String, postID: Int)
     case ReadComment(postID: Int, order: Order)
-    //    UpdateComment, DeleteComment
+//    case UpdateComment
+    case DeleteComment(commentID: Int)
     
     func URLReqeust() -> URLRequest {
         switch self {
@@ -92,7 +93,7 @@ enum APIRequest {
             // MARK: Comment
         case .CreateComment(let comment, let postID):
             var request = URLRequest(url: url)
-            request.httpMethod = Method.GET.rawValue
+            request.httpMethod = Method.POST.rawValue
             request.httpBody = "comment=\(comment)&post=\(postID)".data(using: .utf8, allowLossyConversion: false)
             request.addToken()
             request.addContentType()
@@ -103,7 +104,21 @@ enum APIRequest {
             request.addToken()
             request.addContentType()
             return request
+        case .DeleteComment:
+            var request = URLRequest(url: url)
+            request.httpMethod = Method.DEL.rawValue
+            request.addToken()
+            return request
         }
+    }
+}
+
+// MARK: - URL
+extension URL {
+    static let baseURL = "http://test.monocoding.com:1231"
+    
+    static func endPoint(_ path: String) -> URL {
+        return URL(string: baseURL + path)!
     }
 }
 
@@ -126,6 +141,8 @@ extension APIRequest {
             return .endPoint("/comments")
         case .ReadComment(let postID, let order):
             return .endPoint("/comments?post=\(postID)&_sort=created_at:\(order.rawValue)")
+        case .DeleteComment(let commentID):
+            return .endPoint("/comments/\(commentID)")
         }
     }
     static var token: String {
@@ -134,20 +151,13 @@ extension APIRequest {
     }
 }
 
+// MARK: addToken, addContentType
 extension URLRequest {
     mutating func addToken() {
         self.addValue(APIRequest.token, forHTTPHeaderField: "Authorization")
     }
     mutating func addContentType() {
         self.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-    }
-}
-
-extension URL {
-    static let baseURL = "http://test.monocoding.com:1231"
-    
-    static func endPoint(_ path: String) -> URL {
-        return URL(string: baseURL + path)!
     }
 }
 
@@ -172,7 +182,16 @@ class APIService {
         URLSession.request(endpoint: APIRequest.DeletePost(postID: postID).URLReqeust(), completion: completion)
     }
     // MARK: Comment
+    static func requestCreateComment(comment: String, postID: Int, _ completion: @escaping (Comment?, APIError?) -> Void) {
+        URLSession.request(endpoint: APIRequest.CreateComment(comment: comment, postID: postID).URLReqeust(), completion: completion)
+    }
     static func requestReadComment(postID: Int, completion: @escaping (Comments?, APIError?) -> Void) {
         URLSession.request(endpoint: APIRequest.ReadComment(postID: postID, order: .descending).URLReqeust(), completion: completion)
+    }
+//    static func requestUpdateComment() {
+//
+//    }
+    static func requestDeleteComment(commentID: Int, completion: @escaping (Comment?, APIError?) -> Void) {
+        URLSession.request(endpoint: APIRequest.DeleteComment(commentID: commentID).URLReqeust(), completion: completion)
     }
 }

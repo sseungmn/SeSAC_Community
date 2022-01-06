@@ -69,11 +69,14 @@ final class DetailPostView: BaseView {
     
     private let separator4 = SeparatorView(of: .default)
     
-    private let commentTextField = InsetTextField().then { textField in
+    let commentTextField = InsetTextField().then { textField in
         textField.placeholder = "댓글을 입력해주세요"
-        textField.layer.cornerRadius = 15
+        textField.layer.cornerRadius = 20
         textField.backgroundColor = .systemGray5
         textField.tintColor = .black
+    }
+    let commentSaveButton = RoundButton(size: 30).then { button in
+        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
     }
     // MARK: - Init
     override init(frame: CGRect) {
@@ -130,6 +133,11 @@ final class DetailPostView: BaseView {
             make.top.equalTo(scrollView.snp.bottom).offset(10)
             make.left.right.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(10)
+        }
+        addSubview(commentSaveButton)
+        commentSaveButton.snp.makeConstraints { make in
+            make.centerY.equalTo(commentTextField)
+            make.right.equalTo(commentTextField).inset(10)
         }
     }
     
