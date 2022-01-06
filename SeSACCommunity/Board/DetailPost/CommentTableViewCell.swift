@@ -35,7 +35,6 @@ class CommentTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setConstraint()
-        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -53,10 +52,5 @@ class CommentTableViewCell: UITableViewCell {
         HstackView.addArrangedSubview(moreActionButton)
         
         VstackView.addArrangedSubview(commentLabel)
-    }
-    
-    private func configure() {
-        usernameLabel.text = "테이크아웃 좋아"
-        commentLabel.text = "연말이라 슬럼프가 오고 있어요 도와주세요!!!\n빠르게\n회복\n해야합니다!!!!"
     }
 }

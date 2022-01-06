@@ -76,7 +76,7 @@ extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
         print("===============\n\(post.id)\n\(post.text)")
         cell.bodyLabel.text = post.text
         cell.userNameLabel.text = post.user.username
-        cell.dateLabel.text = post.createdAt.formattedDate
+        cell.dateLabel.text = post.createdAt.toDate.toRelativeTodayTime
         switch post.comments.count {
         case 0: cell.commentInfoStackView.descriptionLabel.text = "댓글 쓰기"
         default: cell.commentInfoStackView.descriptionLabel.text = "댓글 \(post.comments.count)"
