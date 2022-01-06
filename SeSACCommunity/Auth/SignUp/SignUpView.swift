@@ -18,9 +18,13 @@ final class SignUpView: BaseView {
     
     // MARK: Accessable Variable
     var emailTextFeild = FormTextField()
-    var nickNameTextFeild = FormTextField()
-    var passwordTextFeild = FormTextField()
-    var passwordCheckTextFeild = FormTextField()
+    var usernameTextFeild = FormTextField()
+    var passwordTextFeild = FormTextField().then { textField in
+        textField.isSecureTextEntry = true
+    }
+    var passwordCheckTextFeild = FormTextField().then { textField in
+        textField.isSecureTextEntry = true
+    }
     var confirmButton = CustomButton().then { button in
         button.setTitle("가입하기", for: .disabled)
         button.setTitle("시작하기", for: .normal)
@@ -35,7 +39,7 @@ final class SignUpView: BaseView {
     }
     
     override func configure() {
-        for (index, textField) in [emailTextFeild, nickNameTextFeild, passwordTextFeild, passwordCheckTextFeild].enumerated() {
+        for (index, textField) in [emailTextFeild, usernameTextFeild, passwordTextFeild, passwordCheckTextFeild].enumerated() {
             textField.placeholder = fieldTitles[index]
         }
     }
@@ -44,7 +48,7 @@ final class SignUpView: BaseView {
     override func setConstraint() {
         addSubview(VStackView)
         VStackView.addArrangedSubview(emailTextFeild)
-        VStackView.addArrangedSubview(nickNameTextFeild)
+        VStackView.addArrangedSubview(usernameTextFeild)
         VStackView.addArrangedSubview(passwordTextFeild)
         VStackView.addArrangedSubview(passwordCheckTextFeild)
         VStackView.addArrangedSubview(confirmButton)

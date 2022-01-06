@@ -17,8 +17,11 @@ class SignInView: BaseView {
     }
     
     // MARK: Accesable Variable
-    var nickNameTextFeild = FormTextField()
-    var passwordTextFeild = FormTextField()
+    var usernameTextField = FormTextField()
+    var passwordTextFeild = FormTextField().then { textField in
+        textField.textContentType = .password
+        textField.isSecureTextEntry = true
+    }
     var confirmButton = CustomButton().then { button in
         button.setTitle("로그인", for: .normal)
     }
@@ -32,7 +35,7 @@ class SignInView: BaseView {
     }
     
     override func configure() {
-        for (index, textField) in [nickNameTextFeild, passwordTextFeild].enumerated() {
+        for (index, textField) in [usernameTextField, passwordTextFeild].enumerated() {
             textField.placeholder = fieldTitles[index]
         }
     }
@@ -40,7 +43,7 @@ class SignInView: BaseView {
     // MARK: Set Constraint
     override func setConstraint() {
         addSubview(VStackView)
-        VStackView.addArrangedSubview(nickNameTextFeild)
+        VStackView.addArrangedSubview(usernameTextField)
         VStackView.addArrangedSubview(passwordTextFeild)
         VStackView.addArrangedSubview(confirmButton)
         VStackView.snp.makeConstraints { make in

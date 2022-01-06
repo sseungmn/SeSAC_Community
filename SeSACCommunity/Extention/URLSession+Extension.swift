@@ -24,7 +24,6 @@ extension URLSession {
                 return
             }
             
-            print(response)
             guard response.statusCode == 200 else {
                 switch response.statusCode {
                 case 400:

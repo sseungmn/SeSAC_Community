@@ -41,7 +41,7 @@ class SignUpViewController: BaseViewController, UINavigationMemeber {
             .rx.text
             .map { ($0?.isEmpty)! == false }
             .share(replay: 1, scope: .whileConnected)
-        let nicknameValidation = mainView.nickNameTextFeild
+        let nicknameValidation = mainView.usernameTextFeild
             .rx.text
             .map { ($0?.isEmpty)! == false }
             .share(replay: 1, scope: .whileConnected)
@@ -51,7 +51,10 @@ class SignUpViewController: BaseViewController, UINavigationMemeber {
             .share(replay: 1, scope: .whileConnected)
         let passwordCheckValidation = mainView.passwordCheckTextFeild
             .rx.text
-            .map { ($0?.isEmpty)! == false }
+            .map {
+                ($0?.isEmpty)! == false &&
+                self.mainView.passwordTextFeild.text == self.mainView.passwordCheckTextFeild.text
+            }
             .share(replay: 1, scope: .whileConnected)
         
         let isValid = Observable.combineLatest(emailValidation, nicknameValidation, passwordValidation, passwordCheckValidation) { $0 && $1 && $2 && $3 }

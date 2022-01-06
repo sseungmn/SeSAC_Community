@@ -23,19 +23,18 @@ class SignInViewController: BaseViewController, UINavigationMemeber {
             make.right.left.equalToSuperview()
             make.height.equalTo(162)
         }
-        debug()
     }
     
-    func debug() {
-        mainView.nickNameTextFeild.text = "seuoh"
-        mainView.passwordTextFeild.text = "123456"
+    override func configure() {
+        mainView.usernameTextField.text = UserDefaults.standard.string(forKey: "username")
+        mainView.passwordTextFeild.text = UserDefaults.standard.string(forKey: "password")
     }
     
     override func subscribe() {
         mainView.confirmButton.rx.tap
             .subscribe { [weak self] _ in
                 guard let self = self,
-                      let id = self.mainView.nickNameTextFeild.text,
+                      let id = self.mainView.usernameTextField.text,
                       let pw = self.mainView.passwordTextFeild.text else { return }
                 
                 APIService.requestSignIn(identifier: id, password: pw) { userData, error in
