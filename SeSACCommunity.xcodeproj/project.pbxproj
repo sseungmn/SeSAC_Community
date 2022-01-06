@@ -207,6 +207,7 @@
 				B5820026278175D2007DAC5E /* Auth */,
 				B54DCC75278202FF0065BF4D /* Board */,
 				B5ABA64B27809C7A00E40C2A /* Project */,
+				B50406AD2785EB8B00B998EC /* Reusable */,
 				B54DCC6A2781CB740065BF4D /* Model.swift */,
 			);
 			path = SeSACCommunity;
@@ -220,7 +221,6 @@
 				B5ABA64027809C7000E40C2A /* Assets.xcassets */,
 				B5ABA64227809C7000E40C2A /* LaunchScreen.storyboard */,
 				B5ABA64527809C7000E40C2A /* Info.plist */,
-				B50406AD2785EB8B00B998EC /* Reusable */,
 			);
 			path = Project;
 			sourceTree = "<group>";

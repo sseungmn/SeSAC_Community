@@ -23,6 +23,12 @@ class SignInViewController: BaseViewController, UINavigationMemeber {
             make.right.left.equalToSuperview()
             make.height.equalTo(162)
         }
+        debug()
+    }
+    
+    func debug() {
+        mainView.nickNameTextFeild.text = "seuoh"
+        mainView.passwordTextFeild.text = "123456"
     }
     
     override func subscribe() {

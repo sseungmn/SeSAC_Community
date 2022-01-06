@@ -33,6 +33,12 @@ class PostEditorViewController: BaseViewController {
             mainView.postTextView.text = post.text
             mode = .update
         }
+        switch mode {
+        case .create:
+            navigationItem.title = "새싹당근농장 글쓰기"
+        case .update:
+            navigationItem.title = "새싹당근농장 글수정"
+        }
     }
     
     override func setConstraint() {
