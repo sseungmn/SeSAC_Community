@@ -109,8 +109,8 @@ extension DetailPostViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let commentID = comments?[indexPath.row].id else { return }
-        self.showCommentActionSheet(commentID: commentID)
+        guard let comment = comments?[indexPath.row] else { return }
+        self.showCommentActionSheet(comment: comment)
     }
 }
 
@@ -207,12 +207,11 @@ extension DetailPostViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
-    func showCommentActionSheet(commentID: Int) {
-        print(commentID)
+    func showCommentActionSheet(comment: Comment) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let deleteAction = UIAlertAction(title: "댓글 삭제", style: .destructive) { _ in
-            APIService.requestDeleteComment(commentID: commentID) { _, error in
+            APIService.requestDeleteComment(commentID: comment.id) { _, error in
                 guard error == nil else {
                     print("삭제 불가, \(error!)")
                     return
@@ -223,6 +222,7 @@ extension DetailPostViewController {
         
         let updateAction = UIAlertAction(title: "댓글 수정", style: .default) { _ in
             let vc = CommentEditorViewController()
+            vc.comment = comment
             self.pushVC(of: vc)
         }
         

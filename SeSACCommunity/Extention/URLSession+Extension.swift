@@ -24,6 +24,7 @@ extension URLSession {
                 return
             }
             
+            print(response)
             guard response.statusCode == 200 else {
                 switch response.statusCode {
                 case 400:
@@ -33,7 +34,7 @@ extension URLSession {
                 case 500...599:
                     completion(nil, .serverError)
                 default:
-                    completion(nil, .failed)
+                    completion(nil, .statusCodeFailed)
                 }
                 return
             }

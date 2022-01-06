@@ -33,7 +33,7 @@ enum APIRequest {
     
     case CreateComment(comment: String, postID: Int)
     case ReadComment(postID: Int, order: Order)
-//    case UpdateComment
+    case UpdateComment(comment: String, postID: Int, commentID: Int)
     case DeleteComment(commentID: Int)
     
     func URLReqeust() -> URLRequest {
@@ -104,6 +104,13 @@ enum APIRequest {
             request.addToken()
             request.addContentType()
             return request
+        case .UpdateComment(let comment, let postID, _):
+            var request = URLRequest(url: url)
+            request.httpMethod = Method.PUT.rawValue
+            request.httpBody = "comment=\(comment)&post=\(postID)".data(using: .utf8, allowLossyConversion: false)
+            request.addToken()
+            request.addContentType()
+            return request
         case .DeleteComment:
             var request = URLRequest(url: url)
             request.httpMethod = Method.DEL.rawValue
@@ -141,6 +148,8 @@ extension APIRequest {
             return .endPoint("/comments")
         case .ReadComment(let postID, let order):
             return .endPoint("/comments?post=\(postID)&_sort=created_at:\(order.rawValue)")
+        case .UpdateComment(_, _, let commentID):
+            return .endPoint("/comments/\(commentID)")
         case .DeleteComment(let commentID):
             return .endPoint("/comments/\(commentID)")
         }
@@ -188,9 +197,9 @@ class APIService {
     static func requestReadComment(postID: Int, completion: @escaping (Comments?, APIError?) -> Void) {
         URLSession.request(endpoint: APIRequest.ReadComment(postID: postID, order: .descending).URLReqeust(), completion: completion)
     }
-//    static func requestUpdateComment() {
-//
-//    }
+    static func requestUpdateComment(comment: String, postID: Int, commentID: Int, completion: @escaping (Comment?, APIError?) -> Void) {
+        URLSession.request(endpoint: APIRequest.UpdateComment(comment: comment, postID: postID, commentID: commentID).URLReqeust(), completion: completion)
+    }
     static func requestDeleteComment(commentID: Int, completion: @escaping (Comment?, APIError?) -> Void) {
         URLSession.request(endpoint: APIRequest.DeleteComment(commentID: commentID).URLReqeust(), completion: completion)
     }
