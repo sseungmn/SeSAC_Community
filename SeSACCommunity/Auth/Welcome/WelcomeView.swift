@@ -32,7 +32,7 @@ final class WelcomeView: BaseView {
     }
     
     // MARK: Accessable Variable
-    var startButton = CustomButton().then { button in
+    var startButton = ConfirmButton().then { button in
         button.setTitle("시작하기", for: .normal)
     }
     var fotterLabel = UILabel()

@@ -22,7 +22,7 @@ class SignInView: BaseView {
         textField.textContentType = .password
         textField.isSecureTextEntry = true
     }
-    var confirmButton = CustomButton().then { button in
+    var confirmButton = ConfirmButton().then { button in
         button.setTitle("로그인", for: .normal)
     }
     

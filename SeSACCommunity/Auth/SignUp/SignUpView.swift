@@ -25,7 +25,7 @@ final class SignUpView: BaseView {
     var passwordCheckTextFeild = FormTextField().then { textField in
         textField.isSecureTextEntry = true
     }
-    var confirmButton = CustomButton().then { button in
+    var confirmButton = ConfirmButton().then { button in
         button.setTitle("가입하기", for: .disabled)
         button.setTitle("시작하기", for: .normal)
     }
