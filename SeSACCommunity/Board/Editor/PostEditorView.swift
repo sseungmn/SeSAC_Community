@@ -13,6 +13,7 @@ class PostEditorView: BaseView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        postTextView.becomeFirstResponder()
     }
     
     required init?(coder: NSCoder) {

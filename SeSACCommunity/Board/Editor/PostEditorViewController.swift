@@ -53,10 +53,9 @@ class PostEditorViewController: BaseViewController {
             .subscribe { [weak self] _ in
                 guard let self = self,
                       let text = self.mainView.postTextView.text else { return }
-                print(text)
                 switch self.mode {
                 case .create:
-                    APIService.requestCreatePost(text: text) { post, error in
+                    APIService.requestCreatePost(text: text) { _, error in
                         guard error == nil else { return }
                         DispatchQueue.main.async {
                             self.dismiss(animated: true, completion: nil)
@@ -64,7 +63,7 @@ class PostEditorViewController: BaseViewController {
                     }
                 case .update:
                     guard let post = self.post else { return }
-                    APIService.requestUpdatePost(postID: post.id, text: text) { post, error in
+                    APIService.requestUpdatePost(postID: post.id, text: text) { _, error in
                         guard error == nil else { return }
                         DispatchQueue.main.async {
                             self.dismiss(animated: true, completion: nil)
