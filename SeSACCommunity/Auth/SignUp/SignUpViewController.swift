@@ -33,31 +33,52 @@ class SignUpViewController: BaseViewController, UINavigationMemeber {
     override func subscribe() {
         mainView.confirmButton.rx.tap
             .subscribe { [weak self] _ in
-                print("SignUp")
+                guard let username = self?.mainView.usernameTextFeild.text else { return }
+                guard let email = self?.mainView.emailTextFeild.text else { return }
+                guard let password = self?.mainView.passwordTextFeild.text else { return }
+                APIService.requestSignUp(username: username, email: email, password: password) { userInfo, error in
+                    guard error == nil else {
+                        print("회원가입 오류", error!)
+                        return
+                    }
+                    guard let userInfo = userInfo else { return }
+                    UserDefaults.standard.set(userInfo.jwt, forKey: "token")
+                    UserDefaults.standard.set(userInfo.user.id, forKey: "id")
+                    UserDefaults.standard.set(username, forKey: "username")
+                    UserDefaults.standard.set(password, forKey: "password")
+                    
+                    DispatchQueue.main.async {
+                        self?.changeRootVC(to: BoardViewController())
+                    }
+                }
             }
             .disposed(by: disposeBag)
         
-        let emailValidation = mainView.emailTextFeild
-            .rx.text
-            .map { ($0?.isEmpty)! == false }
+        let emailValidation = mainView.emailTextFeild.rx.text
+            .orEmpty
+            .map { $0.isEmpty == false && $0.components(separatedBy: "@").filter { !$0.isEmpty }.count == 2 }
             .share(replay: 1, scope: .whileConnected)
-        let nicknameValidation = mainView.usernameTextFeild
-            .rx.text
-            .map { ($0?.isEmpty)! == false }
+        let usernameValidation = mainView.usernameTextFeild.rx.text
+            .orEmpty
+            .map { $0.isEmpty == false }
             .share(replay: 1, scope: .whileConnected)
-        let passwordValidation = mainView.passwordTextFeild
-            .rx.text
-            .map { ($0?.isEmpty)! == false }
+        let passwordValidation = mainView.passwordTextFeild.rx.text
+            .orEmpty
+            .map { $0.isEmpty == false }
             .share(replay: 1, scope: .whileConnected)
-        let passwordCheckValidation = mainView.passwordCheckTextFeild
-            .rx.text
-            .map {
-                ($0?.isEmpty)! == false &&
-                self.mainView.passwordTextFeild.text == self.mainView.passwordCheckTextFeild.text
+        let passwordCheckValidation = mainView.passwordCheckTextFeild.rx.text
+            .orEmpty
+            .map { $0.isEmpty == false }
+            .share(replay: 1, scope: .whileConnected)
+        
+        let passwordSame = Observable.combineLatest(
+            mainView.passwordTextFeild.rx.text.orEmpty,
+            mainView.passwordCheckTextFeild.rx.text.orEmpty) { origin, check in
+                return origin == check
             }
             .share(replay: 1, scope: .whileConnected)
         
-        let isValid = Observable.combineLatest(emailValidation, nicknameValidation, passwordValidation, passwordCheckValidation) { $0 && $1 && $2 && $3 }
+        let isValid = Observable.combineLatest(emailValidation, usernameValidation, passwordValidation, passwordCheckValidation, passwordSame) { $0 && $1 && $2 && $3 && $4 }
             .share(replay: 1, scope: .whileConnected)
         
         isValid

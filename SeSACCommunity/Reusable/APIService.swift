@@ -43,6 +43,7 @@ enum APIRequest {
             var request = URLRequest(url: url)
             request.httpBody = "username=\(username)&email=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
             request.httpMethod = Method.POST.rawValue
+            request.addContentType()
             return request
         case .SignIn(let identifier, let password):
             var request = URLRequest(url: url)
@@ -171,8 +172,12 @@ extension URLRequest {
 }
 
 class APIService {
-    static func requestSignIn(identifier: String, password: String, _ completion: @escaping (AccessInfo?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.SignIn(identifier: identifier, password: password).URLReqeust(), completion: completion)
+    // MARK: Auth
+    static func requestSignUp(username: String, email: String, password: String, _ completion: @escaping (AccessInfo?, APIError?) -> Void) {
+        URLSession.request(endpoint: APIRequest.SignUp(username: username, email: email, password: password).URLReqeust(), completion: completion)
+    }
+    static func requestSignIn(username: String, password: String, _ completion: @escaping (AccessInfo?, APIError?) -> Void) {
+        URLSession.request(endpoint: APIRequest.SignIn(identifier: username, password: password).URLReqeust(), completion: completion)
     }
     // MARK: Post
     static func requestReadPost(_ completion: @escaping (Board?, APIError?) -> Void) {

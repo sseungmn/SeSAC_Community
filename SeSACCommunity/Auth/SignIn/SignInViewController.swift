@@ -34,17 +34,18 @@ class SignInViewController: BaseViewController, UINavigationMemeber {
         mainView.confirmButton.rx.tap
             .subscribe { [weak self] _ in
                 guard let self = self,
-                      let id = self.mainView.usernameTextField.text,
-                      let pw = self.mainView.passwordTextFeild.text else { return }
+                      let username = self.mainView.usernameTextField.text,
+                      let password = self.mainView.passwordTextFeild.text else { return }
                 
-                APIService.requestSignIn(identifier: id, password: pw) { userData, error in
+                APIService.requestSignIn(username: username, password: password) { userData, error in
                     guard error == nil else {
                         return
                     }
                     guard let userData = userData else { return }
                     UserDefaults.standard.set(userData.jwt, forKey: "token")
                     UserDefaults.standard.set(userData.user.id, forKey: "id")
-                    UserDefaults.standard.set(userData.user.username, forKey: "username")
+                    UserDefaults.standard.set(username, forKey: "username")
+                    UserDefaults.standard.set(password, forKey: "password")
                     DispatchQueue.main.async {
                         self.changeRootVC(to: BoardViewController())
                     }
