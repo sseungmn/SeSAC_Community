@@ -14,7 +14,7 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
     var refreshControl = UIRefreshControl()
     
     let mainView = BoardView()
-    let addFloatingButton = FloatingButton(type: .custom)
+    let addFloatingButton = FloatingButton()
     
     override func loadView() {
         view = mainView
