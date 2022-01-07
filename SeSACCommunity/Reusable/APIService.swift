@@ -6,8 +6,9 @@
 //
 
 import Foundation
+
 enum APIError: Error {
-    case failed, statusCodeFailed,noData, invalidResponse, serverError, tokenExpired, invalidRequest, invalidData
+    case failed, statusCodeFailed, noData, invalidResponse, serverError, tokenExpired, invalidRequest, invalidData
 }
 
 enum APIRequest {
@@ -22,7 +23,7 @@ enum APIRequest {
     }
     
     case SignUp(username: String, email: String, password: String)
-    case SignIn(identifier: String, password: String)
+    case SignIn(username: String, password: String)
     case ChangePassword(currentPassword: String, newPassword: String, confirmNewPassword: String)
     
     case CreatePost(text: String)
@@ -36,88 +37,62 @@ enum APIRequest {
     case UpdateComment(comment: String, postID: Int, commentID: Int)
     case DeleteComment(commentID: Int)
     
-    func URLReqeust() -> URLRequest {
+    var urlRequest: URLRequest {
+        var request = URLRequest(url: url)
         switch self {
-            // MAKR: Auth
+            // MARK: Auth
         case .SignUp(let username, let email, let password):
-            var request = URLRequest(url: url)
+            request.httpMethod = Method.POST.rawValue
             request.httpBody = "username=\(username)&email=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
-            request.httpMethod = Method.POST.rawValue
             request.addContentType()
-            return request
-        case .SignIn(let identifier, let password):
-            var request = URLRequest(url: url)
+        case .SignIn(let username, let password):
             request.httpMethod = Method.POST.rawValue
-            request.httpBody = "identifier=\(identifier)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
-            return request
+            request.httpBody = "identifier=\(username)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
         case .ChangePassword(let currentPassword, let newPassword, let confirmNewPassword):
-            var request = URLRequest(url: url)
             request.httpMethod = Method.POST.rawValue
             request.httpBody = "currentPassword=\(currentPassword)&newPassword\(newPassword)&confirmNewPassword=\(confirmNewPassword)".data(using: .utf8, allowLossyConversion: false)
-            
             request.addToken()
-            return request
             
             // MARK: Post
         case .CreatePost(let text):
-            var request = URLRequest(url: url)
             request.httpMethod = Method.POST.rawValue
             request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
-            
             request.addToken()
-            return request
         case .ReadPost:
-            var request = URLRequest(url: url)
             request.httpMethod = Method.GET.rawValue
-            
             request.addToken()
-            return request
         case .ReadSpecificPost:
-            var request = URLRequest(url: url)
             request.httpMethod = Method.GET.rawValue
             request.addToken()
-            return request
         case .UpdatePost(_, let text):
-            var request = URLRequest(url: url)
             request.httpMethod = Method.PUT.rawValue
             request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
-            
             request.addToken()
             request.addContentType()
-            return request
         case .DeletePost:
-            var request = URLRequest(url: url)
             request.httpMethod = Method.DEL.rawValue
             request.addToken()
-            return request
             
             // MARK: Comment
         case .CreateComment(let comment, let postID):
-            var request = URLRequest(url: url)
             request.httpMethod = Method.POST.rawValue
             request.httpBody = "comment=\(comment)&post=\(postID)".data(using: .utf8, allowLossyConversion: false)
             request.addToken()
             request.addContentType()
-            return request
         case .ReadComment:
-            var request = URLRequest(url: url)
             request.httpMethod = Method.GET.rawValue
             request.addToken()
             request.addContentType()
-            return request
         case .UpdateComment(let comment, let postID, _):
-            var request = URLRequest(url: url)
             request.httpMethod = Method.PUT.rawValue
             request.httpBody = "comment=\(comment)&post=\(postID)".data(using: .utf8, allowLossyConversion: false)
             request.addToken()
             request.addContentType()
-            return request
         case .DeleteComment:
-            var request = URLRequest(url: url)
             request.httpMethod = Method.DEL.rawValue
             request.addToken()
-            return request
         }
+        return request
     }
 }
 
@@ -174,38 +149,38 @@ extension URLRequest {
 class APIService {
     // MARK: Auth
     static func requestSignUp(username: String, email: String, password: String, _ completion: @escaping (AccessInfo?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.SignUp(username: username, email: email, password: password).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.SignUp(username: username, email: email, password: password).urlRequest, completion: completion)
     }
     static func requestSignIn(username: String, password: String, _ completion: @escaping (AccessInfo?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.SignIn(identifier: username, password: password).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.SignIn(username: username, password: password).urlRequest, completion: completion)
     }
     // MARK: Post
     static func requestReadPost(_ completion: @escaping (Board?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.ReadPost(order: .descending).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.ReadPost(order: .descending).urlRequest, completion: completion)
     }
     static func requestReadSpecificPost(postID: Int, _ completion: @escaping (Post?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.ReadSpecificPost(postID: postID).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.ReadSpecificPost(postID: postID).urlRequest, completion: completion)
     }
     static func requestCreatePost(text: String, _ completion: @escaping (Post?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.CreatePost(text: text).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.CreatePost(text: text).urlRequest, completion: completion)
     }
     static func requestUpdatePost(postID: Int, text: String, _ completion: @escaping (Post?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.UpdatePost(postID: postID, text: text).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.UpdatePost(postID: postID, text: text).urlRequest, completion: completion)
     }
     static func requestDeletePost(postID: Int, _ completion: @escaping (Post?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.DeletePost(postID: postID).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.DeletePost(postID: postID).urlRequest, completion: completion)
     }
     // MARK: Comment
     static func requestCreateComment(comment: String, postID: Int, _ completion: @escaping (Comment?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.CreateComment(comment: comment, postID: postID).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.CreateComment(comment: comment, postID: postID).urlRequest, completion: completion)
     }
     static func requestReadComment(postID: Int, completion: @escaping (Comments?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.ReadComment(postID: postID, order: .descending).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.ReadComment(postID: postID, order: .descending).urlRequest, completion: completion)
     }
     static func requestUpdateComment(comment: String, postID: Int, commentID: Int, completion: @escaping (Comment?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.UpdateComment(comment: comment, postID: postID, commentID: commentID).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.UpdateComment(comment: comment, postID: postID, commentID: commentID).urlRequest, completion: completion)
     }
     static func requestDeleteComment(commentID: Int, completion: @escaping (Comment?, APIError?) -> Void) {
-        URLSession.request(endpoint: APIRequest.DeleteComment(commentID: commentID).URLReqeust(), completion: completion)
+        URLSession.request(endpoint: APIRequest.DeleteComment(commentID: commentID).urlRequest, completion: completion)
     }
 }

@@ -47,7 +47,7 @@ class CommentEditorViewController: BaseViewController, UINavigationMemeber {
                       let comment = self.mainView.editorTextView.text
                 else { return }
                 print("postID:\(postID), commentID: \(commentID), comment: \(comment)")
-                APIService.requestUpdateComment(comment: comment , postID: postID, commentID: commentID) { comment, error in
+                APIService.requestUpdateComment(comment: comment, postID: postID, commentID: commentID) { _, error in
                     guard error == nil else {
                         print("수정 불가, \(error!)")
                         return
@@ -57,5 +57,6 @@ class CommentEditorViewController: BaseViewController, UINavigationMemeber {
                     }
                 }
             }
+            .disposed(by: disposeBag)
     }
 }

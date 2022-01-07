@@ -39,6 +39,7 @@ class SignInViewController: BaseViewController, UINavigationMemeber {
                 
                 APIService.requestSignIn(username: username, password: password) { userData, error in
                     guard error == nil else {
+                        print("로그인 실패", error!)
                         return
                     }
                     guard let userData = userData else { return }
