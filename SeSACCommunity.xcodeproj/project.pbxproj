@@ -29,6 +29,8 @@
 		B54DCC77278203110065BF4D /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC76278203110065BF4D /* BoardView.swift */; };
 		B54DCC79278203170065BF4D /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC78278203170065BF4D /* BoardTableViewCell.swift */; };
 		B54DCC7B278206FC0065BF4D /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC7A278206FC0065BF4D /* BoardViewController.swift */; };
+		B55C430C278828440096E387 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C430B278828440096E387 /* Bundle+Extension.swift */; };
+		B55C430E278828830096E387 /* PrivateInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55C430D278828830096E387 /* PrivateInfo.plist */; };
 		B5670E2A278740E70069096B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5670E29278740E70069096B /* CustomTextField.swift */; };
 		B5670E2D2787412F0069096B /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5670E2C2787412F0069096B /* ConfirmButton.swift */; };
 		B5670E2F278741660069096B /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5670E2E278741660069096B /* CustomView.swift */; };
@@ -70,6 +72,8 @@
 		B54DCC76278203110065BF4D /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		B54DCC78278203170065BF4D /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		B54DCC7A278206FC0065BF4D /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		B55C430B278828440096E387 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		B55C430D278828830096E387 /* PrivateInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivateInfo.plist; sourceTree = "<group>"; };
 		B5670E29278740E70069096B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		B5670E2C2787412F0069096B /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
 		B5670E2E278741660069096B /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 				B54DCC732781FB540065BF4D /* UIViewController+Extension.swift */,
 				B50BF08A27861D7900BA09DE /* String+Extension.swift */,
 				B50BF0962787020F00BA09DE /* UIAlertController+Extension.swift */,
+				B55C430B278828440096E387 /* Bundle+Extension.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 		B5ABA62B27809C6F00E40C2A = {
 			isa = PBXGroup;
 			children = (
+				B55C430D278828830096E387 /* PrivateInfo.plist */,
 				B58200242780AE7C007DAC5E /* .swiftlint.yml */,
 				B5ABA63627809C6F00E40C2A /* SeSACCommunity */,
 				B5ABA63527809C6F00E40C2A /* Products */,
@@ -340,6 +346,7 @@
 			files = (
 				B58200252780AE7C007DAC5E /* .swiftlint.yml in Resources */,
 				B5ABA64427809C7000E40C2A /* LaunchScreen.storyboard in Resources */,
+				B55C430E278828830096E387 /* PrivateInfo.plist in Resources */,
 				B5ABA64127809C7000E40C2A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +418,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B54DCC65278197A10065BF4D /* SignUpViewController.swift in Sources */,
+				B55C430C278828440096E387 /* Bundle+Extension.swift in Sources */,
 				B5820029278178A1007DAC5E /* UIColor+Extension.swift in Sources */,
 				B5ABA64F27809FFF00E40C2A /* WelcomeView.swift in Sources */,
 				B50BF0952786DDBD00BA09DE /* CommentEditorView.swift in Sources */,

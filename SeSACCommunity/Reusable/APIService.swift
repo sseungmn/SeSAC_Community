@@ -98,7 +98,7 @@ enum APIRequest {
 
 // MARK: - URL
 extension URL {
-    static let baseURL = "http://test.monocoding.com:1231"
+    static let baseURL = Bundle.main.baseURL
     
     static func endPoint(_ path: String) -> URL {
         return URL(string: baseURL + path)!
