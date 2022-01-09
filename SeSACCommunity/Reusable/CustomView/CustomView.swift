@@ -42,8 +42,6 @@ final class SeparatorView: UIView {
     }
 }
 
-
-
 // MARK: CommentInfoStackView
 final class CommentInfoStackView: UIStackView {
     
