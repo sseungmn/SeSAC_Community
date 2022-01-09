@@ -185,7 +185,7 @@ extension DetailPostViewController {
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
             APIService.requestDeletePost(postID: postID) { _, error in
                 guard error == nil else {
-                    if error == .tokenExpired {
+                    if error == .unauthorized {
                         
                     }
                     return

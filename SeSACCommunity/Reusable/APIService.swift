@@ -7,8 +7,15 @@
 
 import Foundation
 
-enum APIError: Error {
-    case failed, statusCodeFailed, noData, invalidResponse, serverError, tokenExpired, invalidRequest, invalidData
+enum APIError: Error, Equatable {
+    case failed, statusCodeFailed, noData, invalidResponse, serverError, invalidRequest, invalidData
+    case unauthorized
+//    case unauthorized(type: AuthorizedErrorType)
+//    enum AuthorizedErrorType: Int {
+//        case `init`
+//        case tokenExpired
+//        case inaccessible
+//    }
 }
 
 enum APIRequest {

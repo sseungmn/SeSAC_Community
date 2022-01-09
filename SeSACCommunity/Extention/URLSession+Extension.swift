@@ -29,7 +29,7 @@ extension URLSession {
                 case 400:
                     completion(nil, .invalidRequest)
                 case 401:
-                    completion(nil, .tokenExpired)
+                    completion(nil, .unauthorized)
                 case 500...599:
                     completion(nil, .serverError)
                 default:
