@@ -1,17 +1,38 @@
 # SeSAC_Community
-21/01/03 ~ 21/01/06 평가과제
+21/01/03 ~ 21/01/06 평가과제   
+21/01/10 ~ 21/01/13 리펙토링
 
 ## Spec
-- Architecture : MVVM
+
+<details>
+    <summary>평과 과제(~ 01/06)</summary>
+    
+- Architecture : ~~MVVM~~ MVC (시간이 없어 MVVM으로 구현하지 못함)
 - Library (CocoaPod)
-    - RxSwift
+    - RxSwift ( 일부분에 대해서만 적용 )
+    - RxCocoa ( 일부분에 대해서만 적용 )
     - SnapKit
     - Then
 - SwiftLint 적용
 - Code base UI
+    
+</details>
 
 ## Flow Chart
-![_SeSAC_Community](https://user-images.githubusercontent.com/46219689/148036184-9567e358-170c-4033-b73a-24ff514f2660.jpg)
+<details>
+    <summary>초기 기획</summary>
+    
+ ![_SeSAC_Community](https://user-images.githubusercontent.com/46219689/148036184-9567e358-170c-4033-b73a-24ff514f2660.jpg)
+    
+</details>
+    
+<details open>
+    <summary>1차 수정(01/09)</summary>
+    
+ ![_SeSAC_Community (1)](https://user-images.githubusercontent.com/46219689/148677120-a3af0753-2891-431c-b4cc-737327f0d98d.jpg)
+    
+</details>
+
 
 ## 기능
 
