@@ -17,6 +17,8 @@
 		B50BF0922786DDAD00BA09DE /* CommentEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BF0912786DDAD00BA09DE /* CommentEditorViewController.swift */; };
 		B50BF0952786DDBD00BA09DE /* CommentEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BF0942786DDBD00BA09DE /* CommentEditorView.swift */; };
 		B50BF0972787020F00BA09DE /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BF0962787020F00BA09DE /* CustomAlert.swift */; };
+		B52770F3278C4D1A00BD89D2 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F2278C4D1A00BD89D2 /* BaseViewModel.swift */; };
+		B52770F5278C577600BD89D2 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F4278C577600BD89D2 /* WelcomeViewModel.swift */; };
 		B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */; };
 		B54DCC61278191030065BF4D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC60278191030065BF4D /* SignUpView.swift */; };
 		B54DCC65278197A10065BF4D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC64278197A10065BF4D /* SignUpViewController.swift */; };
@@ -60,6 +62,8 @@
 		B50BF0912786DDAD00BA09DE /* CommentEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEditorViewController.swift; sourceTree = "<group>"; };
 		B50BF0942786DDBD00BA09DE /* CommentEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEditorView.swift; sourceTree = "<group>"; };
 		B50BF0962787020F00BA09DE /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		B52770F2278C4D1A00BD89D2 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		B52770F4278C577600BD89D2 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
 		B54DCC60278191030065BF4D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B54DCC64278197A10065BF4D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 				B5C0C4AE2783381200BD24CA /* BaseViewController.swift */,
 				B50406A82785E51C00B998EC /* Refreshable+Protocol.swift */,
 				B54DCC662781BD190065BF4D /* APIService.swift */,
+				B52770F2278C4D1A00BD89D2 /* BaseViewModel.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 			children = (
 				B5ABA63B27809C6F00E40C2A /* WelcomeViewController.swift */,
 				B5ABA64E27809FFF00E40C2A /* WelcomeView.swift */,
+				B52770F4278C577600BD89D2 /* WelcomeViewModel.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -418,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B54DCC65278197A10065BF4D /* SignUpViewController.swift in Sources */,
+				B52770F5278C577600BD89D2 /* WelcomeViewModel.swift in Sources */,
 				B55C430C278828440096E387 /* Bundle+Extension.swift in Sources */,
 				B5820029278178A1007DAC5E /* UIColor+Extension.swift in Sources */,
 				B5ABA64F27809FFF00E40C2A /* WelcomeView.swift in Sources */,
@@ -448,6 +455,7 @@
 				B54DCC77278203110065BF4D /* BoardView.swift in Sources */,
 				B54DCC672781BD190065BF4D /* APIService.swift in Sources */,
 				B5670E2D2787412F0069096B /* ConfirmButton.swift in Sources */,
+				B52770F3278C4D1A00BD89D2 /* BaseViewModel.swift in Sources */,
 				B5ABA63A27809C6F00E40C2A /* SceneDelegate.swift in Sources */,
 				B54DCC7B278206FC0065BF4D /* BoardViewController.swift in Sources */,
 				B50406AF2785EC1200B998EC /* PostEditorView.swift in Sources */,

@@ -7,12 +7,21 @@
 
 import UIKit
 
-import RxGesture
-
 class WelcomeViewController: BaseViewController {
     
     let mainView = WelcomeView()
-    //  let disposeBag = DisposeBag()
+    
+    let viewModel = WelcomeViewModel()
+    
+    private lazy var input = WelcomeViewModel.Input(
+        startButtonTap: self.mainView.startButton.rx
+            .tap
+            .asObservable(),
+        fotterLabelTap: self.mainView.fotterLabel.rx
+            .tapGesture()
+            .when(.recognized)
+    )
+    private lazy var output = viewModel.transform(input: input)
     
     override func loadView() {
         view = mainView
@@ -20,27 +29,23 @@ class WelcomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
     }
     
-    override func subscribe() {
-        // startButton(회원가입) -> SignUpView
-        mainView.startButton.rx
-            .tap
+    func bind() {
+        output.pushSignUpVC
             .subscribe { [weak self] _ in
                 self?.pushVC(of: SignUpViewController())
             }
             .disposed(by: disposeBag)
-        // fotterLabel(로그인) -> SignInView
-        mainView.fotterLabel.rx
-            .tapGesture()
-            .when(.recognized)
+        output.pushSignInVC
             .subscribe { [weak self] gesture in
                 guard let self = self,
                       let text = self.mainView.fotterLabel.text,
                       let gesture = gesture.element else { return }
-                let loginRange = (text as NSString).range(of: "로그인")
+                let loginTextRange = (text as NSString).range(of: "로그인")
                 
-                if gesture.didTapAttributedTextInLabel(label: self.mainView.fotterLabel, inRange: loginRange) {
+                if gesture.didTapAttributedTextInLabel(label: self.mainView.fotterLabel, inRange: loginTextRange) {
                     self.pushVC(of: SignInViewController())
                 }
             }
