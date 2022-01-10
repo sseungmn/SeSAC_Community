@@ -138,7 +138,7 @@ extension APIRequest {
         }
     }
     static var token: String {
-        let jwt = UserDefaults.standard.string(forKey: "token") ?? ""
+        let jwt = UserInfo.jwt
         return "Bearer \(jwt)"
     }
 }

@@ -19,6 +19,8 @@
 		B50BF0972787020F00BA09DE /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BF0962787020F00BA09DE /* CustomAlert.swift */; };
 		B52770F3278C4D1A00BD89D2 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F2278C4D1A00BD89D2 /* BaseViewModel.swift */; };
 		B52770F5278C577600BD89D2 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F4278C577600BD89D2 /* WelcomeViewModel.swift */; };
+		B52770F7278C581E00BD89D2 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F6278C581E00BD89D2 /* SignInViewModel.swift */; };
+		B52770F9278C7EA100BD89D2 /* UserInfo+Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F8278C7EA100BD89D2 /* UserInfo+Wrapper.swift */; };
 		B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */; };
 		B54DCC61278191030065BF4D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC60278191030065BF4D /* SignUpView.swift */; };
 		B54DCC65278197A10065BF4D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC64278197A10065BF4D /* SignUpViewController.swift */; };
@@ -64,6 +66,8 @@
 		B50BF0962787020F00BA09DE /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		B52770F2278C4D1A00BD89D2 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		B52770F4278C577600BD89D2 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		B52770F6278C581E00BD89D2 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		B52770F8278C7EA100BD89D2 /* UserInfo+Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserInfo+Wrapper.swift"; sourceTree = "<group>"; };
 		B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
 		B54DCC60278191030065BF4D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B54DCC64278197A10065BF4D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				B54DCC6E2781CDCE0065BF4D /* SignInViewController.swift */,
+				B52770F6278C581E00BD89D2 /* SignInViewModel.swift */,
 				B54DCC6C2781CD680065BF4D /* SignInView.swift */,
 			);
 			path = SignIn;
@@ -205,6 +210,7 @@
 		B582002727817890007DAC5E /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				B52770F8278C7EA100BD89D2 /* UserInfo+Wrapper.swift */,
 				B5820028278178A1007DAC5E /* UIColor+Extension.swift */,
 				B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */,
 				B54DCC682781BD360065BF4D /* URLSession+Extension.swift */,
@@ -427,12 +433,14 @@
 				B52770F5278C577600BD89D2 /* WelcomeViewModel.swift in Sources */,
 				B55C430C278828440096E387 /* Bundle+Extension.swift in Sources */,
 				B5820029278178A1007DAC5E /* UIColor+Extension.swift in Sources */,
+				B52770F9278C7EA100BD89D2 /* UserInfo+Wrapper.swift in Sources */,
 				B5ABA64F27809FFF00E40C2A /* WelcomeView.swift in Sources */,
 				B50BF0952786DDBD00BA09DE /* CommentEditorView.swift in Sources */,
 				B50406A42785907300B998EC /* CommentTableViewCell.swift in Sources */,
 				B54DCC742781FB540065BF4D /* UIViewController+Extension.swift in Sources */,
 				B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */,
 				B50BF0972787020F00BA09DE /* CustomAlert.swift in Sources */,
+				B52770F7278C581E00BD89D2 /* SignInViewModel.swift in Sources */,
 				B5C0C4AF2783381200BD24CA /* BaseViewController.swift in Sources */,
 				B5670E2F278741660069096B /* CustomView.swift in Sources */,
 				B50406A62785A7E600B998EC /* CommentTableView.swift in Sources */,

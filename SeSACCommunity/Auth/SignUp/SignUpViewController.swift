@@ -42,10 +42,10 @@ class SignUpViewController: BaseViewController, UINavigationMemeber {
                         return
                     }
                     guard let userInfo = userInfo else { return }
-                    UserDefaults.standard.set(userInfo.jwt, forKey: "token")
-                    UserDefaults.standard.set(userInfo.user.id, forKey: "id")
-                    UserDefaults.standard.set(username, forKey: "username")
-                    UserDefaults.standard.set(password, forKey: "password")
+                    UserInfo.jwt = userInfo.jwt
+                    UserInfo.id = userInfo.user.id
+                    UserInfo.username = username
+                    UserInfo.password = password
                     
                     DispatchQueue.main.async {
                         self?.changeRootVC(to: BoardViewController())

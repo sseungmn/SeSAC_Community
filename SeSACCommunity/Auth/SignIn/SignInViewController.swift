@@ -26,8 +26,8 @@ class SignInViewController: BaseViewController, UINavigationMemeber {
     }
     
     override func configure() {
-        mainView.usernameTextField.text = UserDefaults.standard.string(forKey: "username")
-        mainView.passwordTextFeild.text = UserDefaults.standard.string(forKey: "password")
+        mainView.usernameTextField.text = UserInfo.username
+        mainView.passwordTextFeild.text = UserInfo.password
     }
     
     override func subscribe() {
@@ -43,10 +43,10 @@ class SignInViewController: BaseViewController, UINavigationMemeber {
                         return
                     }
                     guard let userData = userData else { return }
-                    UserDefaults.standard.set(userData.jwt, forKey: "token")
-                    UserDefaults.standard.set(userData.user.id, forKey: "id")
-                    UserDefaults.standard.set(username, forKey: "username")
-                    UserDefaults.standard.set(password, forKey: "password")
+                    UserInfo.jwt = userData.jwt
+                    UserInfo.id = userData.user.id
+                    UserInfo.username = username
+                    UserInfo.password = password
                     DispatchQueue.main.async {
                         self.changeRootVC(to: BoardViewController())
                     }
