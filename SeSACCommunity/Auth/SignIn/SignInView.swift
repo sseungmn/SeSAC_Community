@@ -18,7 +18,7 @@ class SignInView: BaseView {
     
     // MARK: Accesable Variable
     var usernameTextField = FormTextField()
-    var passwordTextFeild = FormTextField().then { textField in
+    var passwordTextField = FormTextField().then { textField in
         textField.textContentType = .password
         textField.isSecureTextEntry = true
     }
@@ -35,7 +35,7 @@ class SignInView: BaseView {
     }
     
     override func configure() {
-        for (index, textField) in [usernameTextField, passwordTextFeild].enumerated() {
+        for (index, textField) in [usernameTextField, passwordTextField].enumerated() {
             textField.placeholder = fieldTitles[index]
         }
     }
@@ -44,7 +44,7 @@ class SignInView: BaseView {
     override func setConstraint() {
         addSubview(VStackView)
         VStackView.addArrangedSubview(usernameTextField)
-        VStackView.addArrangedSubview(passwordTextFeild)
+        VStackView.addArrangedSubview(passwordTextField)
         VStackView.addArrangedSubview(confirmButton)
         VStackView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)

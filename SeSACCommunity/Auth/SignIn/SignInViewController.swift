@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import RxRelay
+import RxCocoa
 
 class SignInViewController: BaseViewController, UINavigationMemeber {
     
     let mainView = SignInView()
+    
+    let viewModel = SignInViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,31 +31,31 @@ class SignInViewController: BaseViewController, UINavigationMemeber {
     
     override func configure() {
         mainView.usernameTextField.text = UserInfo.username
-        mainView.passwordTextFeild.text = UserInfo.password
+        mainView.passwordTextField.text = UserInfo.password
     }
     
     override func subscribe() {
-        mainView.confirmButton.rx.tap
-            .subscribe { [weak self] _ in
-                guard let self = self,
-                      let username = self.mainView.usernameTextField.text,
-                      let password = self.mainView.passwordTextFeild.text else { return }
-                
-                APIService.requestSignIn(username: username, password: password) { userData, error in
-                    guard error == nil else {
-                        print("로그인 실패", error!)
-                        return
-                    }
-                    guard let userData = userData else { return }
-                    UserInfo.jwt = userData.jwt
-                    UserInfo.id = userData.user.id
-                    UserInfo.username = username
-                    UserInfo.password = password
-                    DispatchQueue.main.async {
-                        self.changeRootVC(to: BoardViewController())
-                    }
-                }
-            }
+        viewModel.result
+            .subscribe(
+                onNext: { _ in
+                    self.pushVC(of: BoardViewController())
+                }, onError: { error in
+                    print(error)
+                })
+            .disposed(by: disposeBag)
+        
+        self.mainView.usernameTextField.rx.text
+            .orEmpty
+            .bind(to: viewModel.usernameChanged)
+            .disposed(by: disposeBag)
+        
+        self.mainView.passwordTextField.rx.text
+            .orEmpty
+            .bind(to: viewModel.passwordChanged)
+            .disposed(by: disposeBag)
+        
+        self.mainView.confirmButton.rx.tap
+            .bind(to: viewModel.confirmButtonTap)
             .disposed(by: disposeBag)
     }
     
