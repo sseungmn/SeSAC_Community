@@ -20,6 +20,8 @@ class PostEditorViewController: BaseViewController {
     var mode: Mode = .create
     var post: Post?
     
+    let viewModel = PostEditorViewModel()
+    
     let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: nil)
     let saveButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: nil)
     
@@ -49,34 +51,19 @@ class PostEditorViewController: BaseViewController {
     }
     
     override func subscribe() {
-        closeButton.rx.tap
-            .subscribe { [weak self] _ in
-                self?.dismiss(animated: true, completion: nil)
-            }
-            .disposed(by: disposeBag)
+        let input = PostEditorViewModel.Input(
+            closeButtonTap: closeButton.rx.tap,
+            saveButtonTap: saveButton.rx.tap.map { return self.mode },
+            text: mainView.postTextView.rx.text.orEmpty,
+            post: post
+        )
+        let output = viewModel.transform(input: input)
         
-        saveButton.rx.tap
-            .subscribe { [weak self] _ in
-                guard let self = self,
-                      let text = self.mainView.postTextView.text else { return }
-                switch self.mode {
-                case .create:
-                    APIService.requestCreatePost(text: text) { _, error in
-                        guard error == nil else { return }
-                        DispatchQueue.main.async {
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    }
-                case .update:
-                    guard let post = self.post else { return }
-                    APIService.requestUpdatePost(postID: post.id, text: text) { _, error in
-                        guard error == nil else { return }
-                        DispatchQueue.main.async {
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    }
-                }
-            }
+        output.result
+            .observe(on: MainScheduler.instance)
+            .subscribe({ [weak self]_ in
+                self?.dismiss(animated: true, completion: nil)
+            })
             .disposed(by: disposeBag)
     }
 }
