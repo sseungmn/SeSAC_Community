@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignInView: BaseView {
+final class SignInView: BaseView {
     
     // MARK: Private Variable
     private  let fieldTitles = ["닉네임", "비밀번호"]

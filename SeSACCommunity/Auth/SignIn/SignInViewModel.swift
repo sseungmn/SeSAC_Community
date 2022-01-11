@@ -6,14 +6,14 @@
 //
 
 import Foundation
-import RxSwift
-import UIKit
-import RxRelay
-import RxCocoa
 
-typealias SignInRequestInfo = (username: String, password: String)
+import RxSwift
+import RxCocoa
+import RxRelay
 
 class SignInViewModel {
+    
+    typealias UserInput = (username: String, password: String)
     
     var disposeBag: DisposeBag = DisposeBag()
     
@@ -26,9 +26,9 @@ class SignInViewModel {
         .flatMapLatest(requestSignIn)
         .observe(on: MainScheduler.instance)
     
-    func requestSignIn(userInfo: SignInRequestInfo) -> Observable<Void> {
+    func requestSignIn(userInput: UserInput) -> Observable<Void> {
         return Observable.create { observer in
-            APIService.requestSignIn(username: userInfo.username, password: userInfo.password) { userData, error in
+            APIService.requestSignIn(username: userInput.username, password: userInput.password) { userData, error in
                 if let error = error {
                     observer.onError(error)
                     return
@@ -36,8 +36,8 @@ class SignInViewModel {
                 guard let userData = userData else { return }
                 UserInfo.jwt = userData.jwt
                 UserInfo.id = userData.user.id
-                UserInfo.username = userInfo.username
-                UserInfo.password = userInfo.password
+                UserInfo.username = userInput.username
+                UserInfo.password = userInput.password
                 observer.onNext(())
             }
             return Disposables.create()
