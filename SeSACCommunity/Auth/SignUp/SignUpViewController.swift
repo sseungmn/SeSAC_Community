@@ -13,7 +13,8 @@ import RxCocoa
 class SignUpViewController: BaseViewController, UINavigationMemeber {
     
     let mainView = SignUpView()
-    let completedFormCount = BehaviorSubject<Int>(value: 0)
+    
+    let viewModel = SignUpViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,63 +32,31 @@ class SignUpViewController: BaseViewController, UINavigationMemeber {
     }
     
     override func subscribe() {
-        mainView.confirmButton.rx.tap
-            .subscribe { [weak self] _ in
-                guard let username = self?.mainView.usernameTextFeild.text else { return }
-                guard let email = self?.mainView.emailTextFeild.text else { return }
-                guard let password = self?.mainView.passwordTextFeild.text else { return }
-                APIService.requestSignUp(username: username, email: email, password: password) { userInfo, error in
-                    guard error == nil else {
-                        print("회원가입 오류", error!)
-                        return
-                    }
-                    guard let userInfo = userInfo else { return }
-                    UserInfo.jwt = userInfo.jwt
-                    UserInfo.id = userInfo.user.id
-                    UserInfo.username = username
-                    UserInfo.password = password
-                    
-                    DispatchQueue.main.async {
-                        self?.changeRootVC(to: BoardViewController())
-                    }
-                }
-            }
-            .disposed(by: disposeBag)
+        let input = SignUpViewModel.Input(
+            email: mainView.emailTextFeild.rx.text.orEmpty,
+            username: mainView.usernameTextFeild.rx.text.orEmpty,
+            password: mainView.passwordTextFeild.rx.text.orEmpty,
+            passwordCheck: mainView.passwordCheckTextFeild.rx.text.orEmpty,
+            confirmButtonTap: mainView.confirmButton.rx.tap
+        )
         
-        let emailValidation = mainView.emailTextFeild.rx.text
-            .orEmpty
-            .map { $0.isEmpty == false && $0.components(separatedBy: "@").filter { !$0.isEmpty }.count == 2 }
-            .share(replay: 1, scope: .whileConnected)
-        let usernameValidation = mainView.usernameTextFeild.rx.text
-            .orEmpty
-            .map { $0.isEmpty == false }
-            .share(replay: 1, scope: .whileConnected)
-        let passwordValidation = mainView.passwordTextFeild.rx.text
-            .orEmpty
-            .map { $0.isEmpty == false }
-            .share(replay: 1, scope: .whileConnected)
-        let passwordCheckValidation = mainView.passwordCheckTextFeild.rx.text
-            .orEmpty
-            .map { $0.isEmpty == false }
-            .share(replay: 1, scope: .whileConnected)
+        let output = viewModel.transform(input: input)
         
-        let passwordSame = Observable.combineLatest(
-            mainView.passwordTextFeild.rx.text.orEmpty,
-            mainView.passwordCheckTextFeild.rx.text.orEmpty) { origin, check in
-                return origin == check
-            }
-            .share(replay: 1, scope: .whileConnected)
-        
-        let isValid = Observable.combineLatest(emailValidation, usernameValidation, passwordValidation, passwordCheckValidation, passwordSame) { $0 && $1 && $2 && $3 && $4 }
-            .share(replay: 1, scope: .whileConnected)
-        
-        isValid
+        output.isValid
             .bind(to: mainView.confirmButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        isValid
-            .map { $0 ? UIColor.themeColor : UIColor.lightGray}
+        output.isValid
+            .map { $0 ? UIColor.themeColor : UIColor.lightGray }
             .bind(to: mainView.confirmButton.rx.backgroundColor)
             .disposed(by: disposeBag)
+        output.result
+            .subscribe { _ in
+                self.changeRootVC(to: BoardViewController())
+            } onError: { error in
+                print(error)
+            }
+            .disposed(by: disposeBag)
+
     }
 }
