@@ -42,7 +42,7 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     private func setConstraint() {
-        addSubview(VstackView)
+        contentView.addSubview(VstackView)
         VstackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
