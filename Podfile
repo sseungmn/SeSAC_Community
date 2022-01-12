@@ -9,6 +9,7 @@ target 'SeSACCommunity' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxGesture'
+  pod 'RxDataSources'
   
   pod 'SnapKit'
   pod 'Then'
