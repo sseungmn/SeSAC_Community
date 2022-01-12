@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommentTableViewCell: UITableViewCell {
+class CommentTableViewCell: BaseCell {
     
     private let VstackView = UIStackView().then { stackView in
         stackView.axis = .vertical
@@ -32,16 +32,8 @@ class CommentTableViewCell: UITableViewCell {
         label.textAlignment = .left
         label.numberOfLines = 0
     }
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setConstraint()
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setConstraint() {
+    override func setConstraint() {
         contentView.addSubview(VstackView)
         VstackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

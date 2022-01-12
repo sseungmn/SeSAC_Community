@@ -72,16 +72,15 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
 
 extension BoardViewController: UITableViewDelegate {
     func bind() {
-        mainView.tableView.register(BoardTableViewCell.self, forCellReuseIdentifier: BoardTableViewCell.identifier)
+        mainView.tableView.register(BoardTableViewCell.self, forCellReuseIdentifier: BoardTableViewCell.reuserIdentifier)
         mainView.tableView.rx
             .setDelegate(self)
             .disposed(by: disposeBag)
         
         boardRelay.asObservable()
             .bind(to: mainView.tableView.rx.items(
-                cellIdentifier: BoardTableViewCell.identifier, cellType: BoardTableViewCell.self
-            )) {
-                _, element, cell in
+                cellIdentifier: BoardTableViewCell.reuserIdentifier, cellType: BoardTableViewCell.self
+            )) { _, element, cell in
                 
                 cell.bodyLabel.text = element.text
                 cell.userNameLabel.text = element.user.username
