@@ -11,7 +11,9 @@ import RxSwift
 import RxCocoa
 import RxRelay
 
-class SignUpViewModel {
+class SignUpViewModel: BaseViewModel {
+    var disposeBag: DisposeBag = DisposeBag()
+    
     typealias UserInput = (email: String, username: String, password: String)
     
     struct Input {
