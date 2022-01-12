@@ -18,6 +18,7 @@
 		B50BF0952786DDBD00BA09DE /* CommentEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BF0942786DDBD00BA09DE /* CommentEditorView.swift */; };
 		B50BF0972787020F00BA09DE /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BF0962787020F00BA09DE /* CustomAlert.swift */; };
 		B517F3CC278F740F00E51C59 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517F3CB278F740F00E51C59 /* BaseCell.swift */; };
+		B517F3CE278F786100E51C59 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517F3CD278F786100E51C59 /* BoardViewModel.swift */; };
 		B52770F3278C4D1A00BD89D2 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F2278C4D1A00BD89D2 /* BaseViewModel.swift */; };
 		B52770F5278C577600BD89D2 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F4278C577600BD89D2 /* WelcomeViewModel.swift */; };
 		B52770F7278C581E00BD89D2 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F6278C581E00BD89D2 /* SignInViewModel.swift */; };
@@ -69,6 +70,7 @@
 		B50BF0942786DDBD00BA09DE /* CommentEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEditorView.swift; sourceTree = "<group>"; };
 		B50BF0962787020F00BA09DE /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		B517F3CB278F740F00E51C59 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		B517F3CD278F786100E51C59 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
 		B52770F2278C4D1A00BD89D2 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		B52770F4278C577600BD89D2 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		B52770F6278C581E00BD89D2 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -289,8 +291,9 @@
 		B5C0C4B4278372B700BD24CA /* Board */ = {
 			isa = PBXGroup;
 			children = (
-				B54DCC78278203170065BF4D /* BoardTableViewCell.swift */,
 				B54DCC7A278206FC0065BF4D /* BoardViewController.swift */,
+				B517F3CD278F786100E51C59 /* BoardViewModel.swift */,
+				B54DCC78278203170065BF4D /* BoardTableViewCell.swift */,
 				B54DCC76278203110065BF4D /* BoardView.swift */,
 			);
 			path = Board;
@@ -471,6 +474,7 @@
 				B50BF08B27861D7900BA09DE /* String+Extension.swift in Sources */,
 				B50406A92785E51C00B998EC /* Refreshable+Protocol.swift in Sources */,
 				B5670E2A278740E70069096B /* CustomTextField.swift in Sources */,
+				B517F3CE278F786100E51C59 /* BoardViewModel.swift in Sources */,
 				B5ABA63C27809C6F00E40C2A /* WelcomeViewController.swift in Sources */,
 				B5C0C4B32783725900BD24CA /* DetailPostView.swift in Sources */,
 				B5C0C4B72783772600BD24CA /* DetailPostViewController.swift in Sources */,

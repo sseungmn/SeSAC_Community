@@ -80,4 +80,17 @@ class BoardTableViewCell: BaseCell {
         
         addSubview(thickSeparator)
     }
+    
+    override func fetchInfo<T>(cellInfo: T) {
+        guard let cellInfo = cellInfo as? Post else { return }
+        bodyLabel.text = cellInfo.text
+        userNameLabel.text = cellInfo.user.username
+        dateLabel.text = cellInfo.updatedAt.toDate.toRelativeTodayTime
+        switch cellInfo.comments.count {
+        case 0:
+            commentInfoStackView.descriptionLabel.text = "댓글 쓰기"
+        default:
+            commentInfoStackView.descriptionLabel.text = "댓글 \(cellInfo.comments.count)"
+        }
+    }
 }
