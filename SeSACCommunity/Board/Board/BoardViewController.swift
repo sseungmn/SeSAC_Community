@@ -7,10 +7,14 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
+import RxDataSources
 
 class BoardViewController: BaseViewController, UINavigationMemeber {
     
     var board = [Post]()
+    var boardRelay = BehaviorRelay<Board>(value: Board())
+    
     var refreshControl = UIRefreshControl()
     
     let mainView = BoardView()
@@ -23,7 +27,8 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationTitle = "새싹당근농장"
-        mainView.setDelegate(self)
+        bind()
+//        mainView.setDelegate(self)
         initRefresh(with: mainView.tableView)
         fetchBoard()
     }
@@ -33,10 +38,10 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
             guard error == nil else {
                 print(error!)
                 return
-
             }
             guard let board = board else { return }
             self.board = board
+            self.boardRelay.accept(board)
             DispatchQueue.main.async {
                 self.mainView.tableView.reloadData()
             }
@@ -65,30 +70,40 @@ class BoardViewController: BaseViewController, UINavigationMemeber {
     }
 }
 
-extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return board.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: "post", for: indexPath) as? BoardTableViewCell else { return UITableViewCell() }
-        let post = board[indexPath.row]
-        print("===============\n\(post.id)\n\(post.text)")
-        cell.bodyLabel.text = post.text
-        cell.userNameLabel.text = post.user.username
-        cell.dateLabel.text = post.createdAt.toDate.toRelativeTodayTime
-        switch post.comments.count {
-        case 0: cell.commentInfoStackView.descriptionLabel.text = "댓글 쓰기"
-        default: cell.commentInfoStackView.descriptionLabel.text = "댓글 \(post.comments.count)"
-        }
-        return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let post = board[indexPath.row]
-        let vc = DetailPostViewController()
-        vc.postRelay.accept(post)
-        vc.post = post
-        pushVC(of: vc)
+extension BoardViewController: UITableViewDelegate {
+    func bind() {
+        mainView.tableView.register(BoardTableViewCell.self, forCellReuseIdentifier: BoardTableViewCell.identifier)
+        mainView.tableView.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        boardRelay.asObservable()
+            .bind(to: mainView.tableView.rx.items(
+                cellIdentifier: BoardTableViewCell.identifier, cellType: BoardTableViewCell.self
+            )) {
+                _, element, cell in
+                
+                cell.bodyLabel.text = element.text
+                cell.userNameLabel.text = element.user.username
+                cell.dateLabel.text = element.updatedAt.toDate.toRelativeTodayTime
+                switch element.comments.count {
+                case 0:
+                    cell.commentInfoStackView.descriptionLabel.text = "댓글 쓰기"
+                default:
+                    cell.commentInfoStackView.descriptionLabel.text = "댓글 \(element.comments.count)"
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.tableView.rx.modelSelected(Post.self)
+            .subscribe { [weak self] post in
+                guard let post = post.element else { return }
+                let vc = DetailPostViewController()
+                vc.postRelay.accept(post)
+                vc.post = post
+                self?.pushVC(of: vc)
+            }
+            .disposed(by: disposeBag)
     }
 }
 

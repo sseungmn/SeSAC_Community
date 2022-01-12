@@ -7,7 +7,18 @@
 
 import UIKit
 
+import RxSwift
+
 class BoardTableViewCell: UITableViewCell {
+    
+    var disposeBag = DisposeBag()
+    static let identifier = "BoardTableViewCell"
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
+    
     let contentStackView = UIStackView().then { stackView in
         stackView.axis = .vertical
         stackView.distribution = .fill
