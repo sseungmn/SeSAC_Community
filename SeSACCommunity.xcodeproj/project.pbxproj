@@ -23,6 +23,7 @@
 		B52770F9278C7EA100BD89D2 /* UserInfo+Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F8278C7EA100BD89D2 /* UserInfo+Wrapper.swift */; };
 		B543D9F7278DAD2E00B72FAC /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543D9F6278DAD2E00B72FAC /* SignUpViewModel.swift */; };
 		B543D9F9278DE2DD00B72FAC /* PostEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543D9F8278DE2DD00B72FAC /* PostEditorViewModel.swift */; };
+		B543D9FB278F1EDC00B72FAC /* CommentEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543D9FA278F1EDC00B72FAC /* CommentEditorViewModel.swift */; };
 		B54DCC5F278189490065BF4D /* UITapGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */; };
 		B54DCC61278191030065BF4D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC60278191030065BF4D /* SignUpView.swift */; };
 		B54DCC65278197A10065BF4D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DCC64278197A10065BF4D /* SignUpViewController.swift */; };
@@ -72,6 +73,7 @@
 		B52770F8278C7EA100BD89D2 /* UserInfo+Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserInfo+Wrapper.swift"; sourceTree = "<group>"; };
 		B543D9F6278DAD2E00B72FAC /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		B543D9F8278DE2DD00B72FAC /* PostEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorViewModel.swift; sourceTree = "<group>"; };
+		B543D9FA278F1EDC00B72FAC /* CommentEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEditorViewModel.swift; sourceTree = "<group>"; };
 		B54DCC5E278189490065BF4D /* UITapGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
 		B54DCC60278191030065BF4D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B54DCC64278197A10065BF4D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				B543D9F8278DE2DD00B72FAC /* PostEditorViewModel.swift */,
 				B50406B12785EC2B00B998EC /* PostEditorViewController.swift */,
 				B50BF0942786DDBD00BA09DE /* CommentEditorView.swift */,
+				B543D9FA278F1EDC00B72FAC /* CommentEditorViewModel.swift */,
 				B50BF0912786DDAD00BA09DE /* CommentEditorViewController.swift */,
 			);
 			path = Editor;
@@ -469,6 +472,7 @@
 				B50406B22785EC2B00B998EC /* PostEditorViewController.swift in Sources */,
 				B54DCC692781BD360065BF4D /* URLSession+Extension.swift in Sources */,
 				B54DCC77278203110065BF4D /* BoardView.swift in Sources */,
+				B543D9FB278F1EDC00B72FAC /* CommentEditorViewModel.swift in Sources */,
 				B54DCC672781BD190065BF4D /* APIService.swift in Sources */,
 				B5670E2D2787412F0069096B /* ConfirmButton.swift in Sources */,
 				B52770F3278C4D1A00BD89D2 /* BaseViewModel.swift in Sources */,

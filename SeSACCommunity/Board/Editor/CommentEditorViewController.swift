@@ -7,9 +7,12 @@
 
 import UIKit
 
+import RxSwift
+
 class CommentEditorViewController: BaseViewController, UINavigationMemeber {
     
     let mainView = CommentEditorView()
+    let viewModel = CommentEditorViewModel()
     
     var comment: Comment?
     
@@ -34,28 +37,23 @@ class CommentEditorViewController: BaseViewController, UINavigationMemeber {
     }
     
     override func subscribe() {
-        mainView.editorTextView.rx.text
-            .orEmpty
-            .map { $0.count > 0 }
+        guard let comment = comment else { return }
+        let input = CommentEditorViewModel.Input(
+            commentText: mainView.editorTextView.rx.text.orEmpty,
+            commentObejct: Observable.just(comment),
+            saveButtonTap: saveButton.rx.tap)
+        let output = viewModel.transform(input: input)
+        
+        output.saveButtonEnable
             .bind(to: saveButton.rx.isEnabled)
             .disposed(by: disposeBag)
-        saveButton.rx.tap
+        
+        output.result
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] _ in
-                guard let self = self,
-                      let postID = self.comment?.postID,
-                      let commentID = self.comment?.id,
-                      let comment = self.mainView.editorTextView.text
-                else { return }
-                print("postID:\(postID), commentID: \(commentID), comment: \(comment)")
-                APIService.requestUpdateComment(comment: comment, postID: postID, commentID: commentID) { _, error in
-                    guard error == nil else {
-                        print("수정 불가, \(error!)")
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                }
+                self?.navigationController?.popViewController(animated: true)
+            } onError: { error in
+                print(error)
             }
             .disposed(by: disposeBag)
     }
