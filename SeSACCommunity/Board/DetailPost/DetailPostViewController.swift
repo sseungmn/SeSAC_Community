@@ -6,16 +6,18 @@
 //
 
 import UIKit
+
 import RxSwift
-import RxRelay
+import RxCocoa
+import RxDataSources
 
 class DetailPostViewController: BaseViewController {
     
     var refreshControl = UIRefreshControl()
     
     let mainView = DetailPostView()
-    var postID: Int?
     var post: Post?
+    var postRelay = BehaviorRelay<Post?>(value: nil)
     var comments: Comments?
     
     let commentText = PublishRelay<String>()
@@ -39,12 +41,18 @@ class DetailPostViewController: BaseViewController {
         mainView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        navigationItem.rightBarButtonItem = moreActionButton
     }
     
     override func configure() {
         mainView.commentTableView.delegate = self
         mainView.commentTableView.dataSource = self
+        postRelay
+            .map { $0?.user.id == UserInfo.id }
+            .filter { $0 }
+            .subscribe { [weak self] _ in
+                self?.navigationItem.rightBarButtonItem = self?.moreActionButton
+            }
+            .disposed(by: disposeBag)
     }
     
     override func subscribe() {
@@ -71,7 +79,7 @@ class DetailPostViewController: BaseViewController {
         commentSaveButtonTap
             .subscribe { [weak self] _ in
                 guard let comment = self?.mainView.commentTextField.text,
-                      let postID = self?.postID else { return }
+                      let postID = self?.post?.id else { return }
                 
                 APIService.requestCreateComment(comment: comment, postID: postID) { _, error in
                     guard error == nil else {
@@ -100,17 +108,21 @@ extension DetailPostViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = mainView.commentTableView.dequeueReusableCell(withIdentifier: "cell") as? CommentTableViewCell else { return UITableViewCell() }
         
         cell.backgroundColor = .randomColor
-        guard let commnet = comments?[indexPath.row] else { return UITableViewCell() }
-        print("===============\n\(commnet.id)\n\(commnet.comment)")
-        cell.moreActionButton.tag = commnet.id // tag를 이용해서 해당 id를 불러올것이다.
-        cell.usernameLabel.text = commnet.user.username
-        cell.commentLabel.text = commnet.comment
+        guard let comment = comments?[indexPath.row] else { return UITableViewCell() }
+        if comment.user.id != UserInfo.id {
+            cell.moreActionButton.isHidden = true
+        } else {
+            cell.moreActionButton.isHidden = false
+        }
+        cell.moreActionButton.tag = comment.id // tag를 이용해서 해당 id를 불러올것이다.
+        cell.moreActionButton.rx.tap
+            .subscribe { [weak self] _ in
+                self?.showCommentActionSheet(comment: comment)
+            }
+            .disposed(by: disposeBag)
+        cell.usernameLabel.text = comment.user.username
+        cell.commentLabel.text = comment.comment
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let comment = comments?[indexPath.row] else { return }
-        self.showCommentActionSheet(comment: comment)
     }
 }
 
@@ -128,7 +140,7 @@ extension DetailPostViewController: Refreshable {
 // MARK: Request
 extension DetailPostViewController {
     func requestPost() {
-        guard let postID = postID else { return }
+        guard let postID = post?.id else { return }
         APIService.requestReadSpecificPost(postID: postID) { [weak self] post, error in
             guard error == nil else {
                 print(error!)
@@ -180,7 +192,7 @@ extension DetailPostViewController {
 extension DetailPostViewController {
     func showPostActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        guard let postID = postID else { return }
+        guard let postID = post?.id else { return }
         
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
             APIService.requestDeletePost(postID: postID) { _, error in

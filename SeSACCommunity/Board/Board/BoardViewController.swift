@@ -86,7 +86,8 @@ extension BoardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let post = board[indexPath.row]
         let vc = DetailPostViewController()
-        vc.postID = post.id
+        vc.postRelay.accept(post)
+        vc.post = post
         pushVC(of: vc)
     }
 }
