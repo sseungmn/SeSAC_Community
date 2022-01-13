@@ -18,6 +18,19 @@
     
 </details>
 
+<details open>
+    <summary>리펙토링(~ 01/13)</summary>
+    
+- Architecture : MVVM
+- Library (CocoaPod)
+    - RxSwift / RxCocoa ( 대부분 적용 )
+    - SnapKit
+    - Then
+- SwiftLint 적용
+- Code base UI
+    
+</details>
+
 ## Flow Chart
 <details>
     <summary>초기 기획</summary>
@@ -44,5 +57,16 @@
     
  ![Simulator Screen Recording - iPhone 13 Pro Max - 2022-01-05 at 22 57 50](https://user-images.githubusercontent.com/46219689/148229791-6ec5cc41-32a8-41a9-ba54-4d3e51b944bd.gif)
     
+</details>
+</ul>
+
+- 작성자에 따른 엑션버튼 활성화
+
+<ul>
+<details>
+    <summary>시연 영상</summary>
+ 
+ ![Simulator Screen Recording - iPhone 13 Pro Max - 2022-01-13 at 18 05 05](https://user-images.githubusercontent.com/46219689/149299396-505639ff-72d3-41a1-b3f6-0e7ccede2d7e.gif)
+
 </details>
 </ul>
