@@ -70,3 +70,13 @@
 
 </details>
 </ul>
+
+- 전체적인 구동 테스트
+<ul>
+<details open>
+    <summary>시연 영상</summary>
+    
+ ![Simulator Screen Recording - iPhone 13 Pro Max - 2022-01-13 at 18 24 10](https://user-images.githubusercontent.com/46219689/149302332-9cb0f6ed-53f8-4b6f-a938-6e9b0bee6c49.gif)
+
+</details>
+</ul>
