@@ -71,7 +71,8 @@ class BoardViewController: BaseViewController, UINavigationMemeber, UITableViewD
             .subscribe { [weak self] post in
                 guard let post = post.element else { return }
                 let vc = DetailPostViewController()
-                vc.postRelay.accept(post)
+                vc.detailPostViewModel.post.accept(post)
+                vc.postID.onNext(post.id)
                 vc.post = post
                 self?.pushVC(of: vc)
             }

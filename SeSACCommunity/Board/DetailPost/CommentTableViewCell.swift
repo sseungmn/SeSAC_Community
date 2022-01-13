@@ -45,4 +45,17 @@ class CommentTableViewCell: BaseCell {
         
         VstackView.addArrangedSubview(commentLabel)
     }
+    
+    override func fetchInfo<T>(cellInfo: T) {
+        guard let cellInfo = cellInfo as? Comment else { return }
+        
+        backgroundColor = .randomColor
+        if cellInfo.user.id != UserInfo.id {
+            moreActionButton.isHidden = true
+        } else {
+            moreActionButton.isHidden = false
+        }
+        usernameLabel.text = cellInfo.user.username
+        commentLabel.text = cellInfo.comment
+    }
 }

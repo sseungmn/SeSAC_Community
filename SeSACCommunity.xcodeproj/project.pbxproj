@@ -19,6 +19,8 @@
 		B50BF0972787020F00BA09DE /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BF0962787020F00BA09DE /* CustomAlert.swift */; };
 		B517F3CC278F740F00E51C59 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517F3CB278F740F00E51C59 /* BaseCell.swift */; };
 		B517F3CE278F786100E51C59 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517F3CD278F786100E51C59 /* BoardViewModel.swift */; };
+		B517F3D0278FEE4200E51C59 /* DetailPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517F3CF278FEE4200E51C59 /* DetailPostViewModel.swift */; };
+		B517F3D2278FFC5D00E51C59 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517F3D1278FFC5D00E51C59 /* CommentViewModel.swift */; };
 		B52770F3278C4D1A00BD89D2 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F2278C4D1A00BD89D2 /* BaseViewModel.swift */; };
 		B52770F5278C577600BD89D2 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F4278C577600BD89D2 /* WelcomeViewModel.swift */; };
 		B52770F7278C581E00BD89D2 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52770F6278C581E00BD89D2 /* SignInViewModel.swift */; };
@@ -71,6 +73,8 @@
 		B50BF0962787020F00BA09DE /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		B517F3CB278F740F00E51C59 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		B517F3CD278F786100E51C59 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
+		B517F3CF278FEE4200E51C59 /* DetailPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewModel.swift; sourceTree = "<group>"; };
+		B517F3D1278FFC5D00E51C59 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		B52770F2278C4D1A00BD89D2 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		B52770F4278C577600BD89D2 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		B52770F6278C581E00BD89D2 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -303,9 +307,11 @@
 			isa = PBXGroup;
 			children = (
 				B5C0C4B22783725900BD24CA /* DetailPostView.swift */,
+				B517F3CF278FEE4200E51C59 /* DetailPostViewModel.swift */,
 				B5C0C4B62783772600BD24CA /* DetailPostViewController.swift */,
 				B50406A32785907300B998EC /* CommentTableViewCell.swift */,
 				B50406A52785A7E600B998EC /* CommentTableView.swift */,
+				B517F3D1278FFC5D00E51C59 /* CommentViewModel.swift */,
 			);
 			path = DetailPost;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 				B5C0C4AF2783381200BD24CA /* BaseViewController.swift in Sources */,
 				B5670E2F278741660069096B /* CustomView.swift in Sources */,
 				B50406A62785A7E600B998EC /* CommentTableView.swift in Sources */,
+				B517F3D2278FFC5D00E51C59 /* CommentViewModel.swift in Sources */,
 				B50BF0922786DDAD00BA09DE /* CommentEditorViewController.swift in Sources */,
 				B50BF08B27861D7900BA09DE /* String+Extension.swift in Sources */,
 				B50406A92785E51C00B998EC /* Refreshable+Protocol.swift in Sources */,
@@ -493,6 +500,7 @@
 				B5670E2D2787412F0069096B /* ConfirmButton.swift in Sources */,
 				B52770F3278C4D1A00BD89D2 /* BaseViewModel.swift in Sources */,
 				B5ABA63A27809C6F00E40C2A /* SceneDelegate.swift in Sources */,
+				B517F3D0278FEE4200E51C59 /* DetailPostViewModel.swift in Sources */,
 				B54DCC7B278206FC0065BF4D /* BoardViewController.swift in Sources */,
 				B50406AF2785EC1200B998EC /* PostEditorView.swift in Sources */,
 			);
