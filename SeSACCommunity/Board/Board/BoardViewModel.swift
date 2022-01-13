@@ -13,9 +13,10 @@ import RxCocoa
 class BoardViewModel: BaseViewModel {
     
     var disposeBag: DisposeBag = DisposeBag()
+    
+    let fetchBoard = PublishRelay<Void>()
 
     struct Input {
-        let fetchBoard: PublishRelay<Void>
     }
 
     struct Output {
@@ -23,7 +24,7 @@ class BoardViewModel: BaseViewModel {
     }
 
     func transform(input: Input) -> Output {
-        let result = input.fetchBoard
+        let result = fetchBoard
             .flatMap(request)
         return Output(result: result)
     }

@@ -7,8 +7,6 @@
 
 import UIKit
 
-import RxSwift
-
 class BoardTableViewCell: BaseCell {
     
     let contentStackView = UIStackView().then { stackView in

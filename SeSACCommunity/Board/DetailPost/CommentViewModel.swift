@@ -14,6 +14,8 @@ class CommentViewModel: BaseViewModel {
     
     var disposeBag: DisposeBag = DisposeBag()
     
+    let postID = BehaviorRelay<Int?>(value: nil)
+    
     let inputText = PublishRelay<String>()
     let readComment = PublishRelay<Void>()
     let deleteComment = PublishRelay<Int>()
@@ -22,7 +24,7 @@ class CommentViewModel: BaseViewModel {
     struct Input {
         let saveButtonTap: Observable<ControlEvent<Void>.Element>
         let textFieldText: Observable<ControlProperty<String>.Element>
-        let postID: Observable<Int>
+//        let postID: Observable<Int>
     }
     
     struct Output {
@@ -37,6 +39,10 @@ class CommentViewModel: BaseViewModel {
     }
     
     func transform(input: Input) -> Output {
+        let postID = postID
+            .filter { $0 != nil }
+            .map { $0! }
+        
         input.textFieldText
             .bind(to: inputText)
             .disposed(by: disposeBag)
@@ -47,7 +53,7 @@ class CommentViewModel: BaseViewModel {
         
         let createResult = input.saveButtonTap
             .withLatestFrom(
-                Observable.combineLatest(inputText.asObservable(), input.postID)
+                Observable.combineLatest(inputText.asObservable(), postID)
             )
             .flatMapLatest(requestCreate)
         
@@ -55,7 +61,7 @@ class CommentViewModel: BaseViewModel {
             .map { "" }
         
         let readResult = readComment
-            .withLatestFrom(input.postID)
+            .withLatestFrom(postID)
             .flatMapLatest(requestRead)
         
         let deleteResult = deleteComment
@@ -66,7 +72,6 @@ class CommentViewModel: BaseViewModel {
             .asObservable()
         
         return Output(createResult: createResult,
-//                      isOwner: ,
                       readResult: readResult,
                       updateResult: updateResult,
                       deleteResult: deleteResult,

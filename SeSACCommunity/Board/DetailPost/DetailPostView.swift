@@ -147,4 +147,15 @@ final class DetailPostView: BaseView {
         separator3.setFrame(from: commentInfoStackView.frame)
         separator4.setFrame(from: commentTableView.frame)
     }
+    
+    func fetchInfo<T>(info: T) {
+        guard let info = info as? Post else { return }
+        usernameLabel.text = info.user.username
+        dateLabel.text = info.createdAt.toDate.toAbsoluteTime
+        postBodyLabel.text = info.text
+        commentInfoStackView.descriptionLabel.text = "댓글 \(info.comments.count)"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.drawSeparator()
+        }
+    }
 }

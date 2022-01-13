@@ -6,23 +6,18 @@
 //
 
 import UIKit
+
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 class BoardViewController: BaseViewController, UINavigationMemeber, UITableViewDelegate {
     
-    var boardRelay = BehaviorRelay<Board>(value: Board())
-    let fetchBoard = PublishRelay<Void>()
-    let viewModel = BoardViewModel()
-    lazy var input = BoardViewModel.Input(
-        fetchBoard: fetchBoard
-    )
-    
-    var refreshControl = UIRefreshControl()
-    
     let mainView = BoardView()
+    var refreshControl = UIRefreshControl()
     let addFloatingButton = FloatingButton()
+    
+    let viewModel = BoardViewModel()
+    var boardRelay = BehaviorRelay<Board>(value: Board())
     
     override func loadView() {
         view = mainView
@@ -32,11 +27,11 @@ class BoardViewController: BaseViewController, UINavigationMemeber, UITableViewD
         super.viewDidLoad()
         navigationTitle = "새싹당근농장"
         initRefresh(with: mainView.tableView)
-        fetchBoard.accept(())
+        viewModel.fetchBoard.accept(())
     }
     
     override func subscribe() {
-        let output = viewModel.transform(input: input)
+        let output = viewModel.transform(input: BoardViewModel.Input())
         
         addFloatingButton.rx.tap
             .subscribe { [weak self] _ in
@@ -72,8 +67,7 @@ class BoardViewController: BaseViewController, UINavigationMemeber, UITableViewD
                 guard let post = post.element else { return }
                 let vc = DetailPostViewController()
                 vc.detailPostViewModel.post.accept(post)
-                vc.postID.onNext(post.id)
-                vc.post = post
+                vc.commentViewModel.postID.accept(post.id)
                 self?.pushVC(of: vc)
             }
             .disposed(by: disposeBag)
@@ -98,7 +92,7 @@ class BoardViewController: BaseViewController, UINavigationMemeber, UITableViewD
 extension BoardViewController: Refreshable {
     func reloadView() {
         print("BoardView Reloaded")
-        fetchBoard.accept(())
+        viewModel.fetchBoard.accept(())
         self.mainView.tableView.reloadData()
     }
 }

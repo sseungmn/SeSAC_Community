@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 import RxSwift
 import RxRelay
 
@@ -16,14 +17,13 @@ enum Mode {
 class PostEditorViewController: BaseViewController {
     
     let mainView = PostEditorView()
+    let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: nil)
+    let saveButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: nil)
     
     var mode: Mode = .create
     var post: Post?
     
     let viewModel = PostEditorViewModel()
-    
-    let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: nil)
-    let saveButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()

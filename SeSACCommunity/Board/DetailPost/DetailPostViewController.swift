@@ -9,24 +9,19 @@ import UIKit
 
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 class DetailPostViewController: BaseViewController {
     
-    var refreshControl = UIRefreshControl()
-    
     let mainView = DetailPostView()
-    var postID = BehaviorSubject<Int>(value: 0)
-    var post: Post?
-    var commentArray = BehaviorRelay<Comments>(value: Comments())
-    
-    let detailPostViewModel = DetailPostViewModel()
-    let commentViewModel = CommentViewModel()
-    
+    var refreshControl = UIRefreshControl()
     let moreActionButton = UIBarButtonItem(image: UIImage(named: "ellipsis.vertical"),
                                            style: .plain,
                                            target: self,
                                            action: nil)
+    
+    let detailPostViewModel = DetailPostViewModel()
+    let commentViewModel = CommentViewModel()
+    var commentArray = BehaviorRelay<Comments>(value: Comments())
     
     override func viewWillAppear(_ animated: Bool) {
         reloadView()
@@ -58,8 +53,7 @@ class DetailPostViewController: BaseViewController {
             textFieldText: mainView.commentTextField.rx.text
                 .orEmpty
                 .distinctUntilChanged()
-                .share(replay: 1, scope: .whileConnected),
-            postID: postID.asObservable()
+                .share(replay: 1, scope: .whileConnected)
         )
         let output = commentViewModel.transform(input: input)
             
@@ -107,10 +101,10 @@ class DetailPostViewController: BaseViewController {
     }
     
     func bindDetailPost() {
-        let input = DetailPostViewModel.Input()
-        let output = detailPostViewModel.transform(input: input)
+        let output = detailPostViewModel.transform(input: DetailPostViewModel.Input())
         
         output.isPostOwner
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] _ in
                 self?.navigationItem.rightBarButtonItem = self?.moreActionButton
             }
@@ -122,6 +116,31 @@ class DetailPostViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.readResult
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] post in
+                self?.mainView.fetchInfo(info: post)
+                self?.commentViewModel.readComment.accept(())
+            } onError: { error in
+                print(error)
+            }
+            .disposed(by: disposeBag)
+        
+        output.updateResult
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] post in
+                guard let post = post.element else { return }
+                let vc = PostEditorViewController()
+                vc.post = post
+                self?.presentVC(of: vc)
+            }
+            .disposed(by: disposeBag)
+        output.deleteResult
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -157,34 +176,8 @@ extension DetailPostViewController: Refreshable {
     func reloadView() {
         DispatchQueue.main.async {
             print("DetailPostView Reloaded")
-            self.requestPost()
+            self.detailPostViewModel.readPost.accept(())
             self.mainView.commentTableView.reloadData()
-        }
-    }
-}
-
-// MARK: Request
-extension DetailPostViewController {
-    func requestPost() {
-        guard let postID = post?.id else { return }
-        APIService.requestReadSpecificPost(postID: postID) { [weak self] post, error in
-            guard error == nil else {
-                print(error!)
-                return
-            }
-            guard let post = post else { return }
-            self?.post = post
-            
-            DispatchQueue.main.async {
-                self?.mainView.usernameLabel.text = post.user.username
-                self?.mainView.dateLabel.text = post.createdAt.toDate.toAbsoluteTime
-                self?.mainView.postBodyLabel.text = post.text
-                self?.mainView.commentInfoStackView.descriptionLabel.text = "댓글 \(post.comments.count)"
-                self?.commentViewModel.readComment.accept(())
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self?.mainView.drawSeparator()
-                }
-            }
         }
     }
 }
@@ -193,26 +186,12 @@ extension DetailPostViewController {
 extension DetailPostViewController {
     func showPostActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        guard let postID = post?.id else { return }
         
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
-            APIService.requestDeletePost(postID: postID) { _, error in
-                guard error == nil else {
-                    if error == .unauthorized {
-                        
-                    }
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }
+            self.detailPostViewModel.deletePost.accept(())
         }
         let updateAction = UIAlertAction(title: "글 수정", style: .default) { _ in
-            guard let post = self.post else { return }
-            let vc = PostEditorViewController()
-            vc.post = post
-            self.presentVC(of: vc)
+            self.detailPostViewModel.updatePost.accept(())
         }
         
         let cancelAction = UIAlertAction(title: "글 닫기", style: .cancel, handler: nil)

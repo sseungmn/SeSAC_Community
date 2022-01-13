@@ -310,8 +310,8 @@
 				B517F3CF278FEE4200E51C59 /* DetailPostViewModel.swift */,
 				B5C0C4B62783772600BD24CA /* DetailPostViewController.swift */,
 				B50406A32785907300B998EC /* CommentTableViewCell.swift */,
-				B50406A52785A7E600B998EC /* CommentTableView.swift */,
 				B517F3D1278FFC5D00E51C59 /* CommentViewModel.swift */,
+				B50406A52785A7E600B998EC /* CommentTableView.swift */,
 			);
 			path = DetailPost;
 			sourceTree = "<group>";
